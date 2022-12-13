@@ -1,0 +1,24 @@
+
+.App {
+  font: 400;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  font-size: 2em;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.msg{
+  width: 100vw;
+}
+
+.steps{
+  width: 55%;
+}
+
+.steps li{
+  margin-top: 1em;
+}
