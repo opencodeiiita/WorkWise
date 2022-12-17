@@ -1,10 +1,12 @@
 # WorkWise
-WorkWise is a productivity-centric project aimed at helping users stay focused and manage their projects more efficiently. Our main features include a customizable home screen with widgets like time, temperature, and Gmail inbox, as well as a Kanban board for project management.
+WorkWise is a productivity tool designed to assist users in staying focused and efficiently managing their projects. It features a focus timer and the ability to customize a selection of minimal widgets, including the time, weather, bookmarks, etc. Additionally, WorkWise utilizes the Kanban Board approach to project management, which involves visually representing work at various stages using cards and columns. This method aims to improve visualization, limit work-in-progress, and optimize efficiency.
+
+To summarise, the first page would be like a lockscreen, it will display various widgets the user wants to see.
+the second page would be the Kanban Board Page, similar to websites like Trello, etc.
 
 ## Tech Stack
 - Node.js (v16.18.0)
 - React.js
-- Antd
 - Tailwind
 
 ## Dependencies
@@ -46,5 +48,8 @@ We welcome contributions to WorkWise! If you would like to contribute, please fo
 * Avoid creating duplicate pull requests. If necessary, please comment on the original pull request with the number of the new one, and close the obsolete one yourself.
 * Be polite and respectful to other members of the community.
 
-## Contributors
-- [Your Name Here] - [GitHub handle]
+## Communicate
+Whether you are working on a new feature or facing a doubt please feel free to ask us on our discord channel. We will be happy to help you out.
+
+## Communicate
+Whether you are working on a new feature or facing a doubt please feel free to ask us on our [discord](https://discord.gg/WEMwVqnr) channel. We will be happy to help you out.

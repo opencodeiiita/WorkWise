@@ -13,7 +13,7 @@ function App() {
         <li>Change all this text on this website to "Installed Tailwind" And only use tailwind to write its CSS</li>
 			</ul>
 		</div>
-	);
+	); 
 }
 
 export default App;
