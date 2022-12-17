@@ -27,6 +27,7 @@ The app will be live on localhost:3000.
 
 ## How To Setup
 * Make sure your machine is connected to the internet.
+* Fork the repository.
 * Open a shell (command prompt, terminal, etc.) on your machine.
 * Change to the directory where you want to copy the project.
 * Clone it to your local setup by using command git clone ```<repo link>```.
