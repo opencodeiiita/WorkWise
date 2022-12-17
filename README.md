@@ -34,6 +34,9 @@ The app will be live on localhost:3000.
 * After the process is completed, run the command ```npm start```.
 * The website will be live on ```localhost:3000```.
 
+## Claim an Issue
+Comment on the issue. In case of no activity on the issue even after 2 days, the issue will be reassigned. If you have difficulty approaching the issue, feel free to ask on our discord channel.
+
 ## Contributing
 We welcome contributions to WorkWise! If you would like to contribute, please follow these guidelines:
 
