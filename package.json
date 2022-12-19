@@ -1,0 +1,27 @@
+{
+  "name": "workwise",
+  "version": "1.0.0",
+  "description": "WorkWise is a productivity tool designed to assist users in staying focused and efficiently managing their projects. It features a focus timer and the ability to customize a selection of minimal widgets, including the time, weather, bookmarks, etc. Additionally, WorkWise utilizes the Kanban Board approach to project management, which involves visually representing work at various stages using cards and columns. This method aims to improve visualization, limit work-in-progress, and optimize efficiency.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opencodeiiita/WorkWise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/opencodeiiita/WorkWise/issues"
+  },
+  "homepage": "https://github.com/opencodeiiita/WorkWise#readme",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "web-vitals": "^3.1.0"
+  }
+}
