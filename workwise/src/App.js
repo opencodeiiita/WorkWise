@@ -1,13 +1,11 @@
-import logo from './logo.svg';
+import homepage from "./src/pages/homepage";
 import './App.css';
 
 function App() {
   return (
-		<div className="App">
-			<div className="msg  text-bold text-red-800">
-				Completed this issue by installing tailwind
-			</div>
-		</div>
+		<>
+		<homepage/>
+	</>
 	); 
 }
 
