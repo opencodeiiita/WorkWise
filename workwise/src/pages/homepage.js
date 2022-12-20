@@ -3,7 +3,7 @@ import '../App.css';
 import Time from '../components/Time'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
-
+import Date from '../components/Date';
 
 export default function Homepage() {
 
@@ -33,8 +33,9 @@ export default function Homepage() {
     <div className=" image w-full h-screen bg-no-repeat bg-cover" style={{ backgroundImage:`url(${url})` }} >
       
       <div className="App">
-			<div className="msg  text-bold text-red-800">
+			<div className="msg  text-bold text-white">
 				<Time/>
+        <Date/>
 			</div>
 			
 		</div>
