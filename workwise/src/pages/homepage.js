@@ -1,5 +1,6 @@
 import React from 'react'
-
+import '../App.css';
+import Time from '../components/Time'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 
@@ -12,7 +13,7 @@ export default function Homepage() {
   
     const fetchBg=async()=>{
       if(!rendered){
-        const response=await axios.get('https://api.unsplash.com/photos/random/?client_id=NyUvXIq3Ek5F89nIPbNAGA84yhFxG3mOiSpvOb2ZklE')
+        const response=await axios.get('https://api.unsplash.com/photos/random/?client_id=NyUvXIq3Ek5F89nIPbNAGA84yhFxG3mOiSpvOb2ZklE&query=nature&orientation=landscape')
         const data=await response.data;
         setUrl(data.urls.full);
         setRendered(true);
@@ -29,6 +30,13 @@ export default function Homepage() {
 
   return (
     <div className=" image w-full h-screen bg-no-repeat bg-cover" style={{ backgroundImage:`url(${url})` }} >
+      
+      <div className="App">
+			<div className="msg  text-bold text-red-800">
+				<Time/>
+			</div>
+			
+		</div>
      
     </div>
   )
