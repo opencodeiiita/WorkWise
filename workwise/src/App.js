@@ -7,7 +7,9 @@ function App() {
 		<div className="App">
 			<div className="msg  text-bold text-red-800">
 				<Time/>
-				<homepage/>
+			</div>
+			<div>
+			<homepage/>
 			</div>
 		</div>
 

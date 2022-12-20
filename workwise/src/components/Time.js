@@ -1,25 +1,25 @@
 import React, { useState,useEffect } from 'react'
 
 export default function Time() {
-    var timezone = "Asia/Kolkata";
-    const [time, setTime] = useState("00:00:00")
 
-    const fetchTime = async ()=>{
-        const response = await fetch("https://www.timeapi.io/api/Time/current/zone?timeZone=" + timezone);
-        const json = await response.json();
-        console.log(json.time);
-        setTime(json.time);
-    }
+  const [count, setCount] = useState("");
 
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        fetchTime();
-  },100);
-        
-    }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      let today = new Date();
+      let hrs = addzero(today.getHours());
+      let min = addzero(today.getMinutes());
+      // let sec = addzero(today.getSeconds());
+      setCount((count) => count = `${hrs}:${min}`);
+    }, 1000);
+  });
     
     return (
-    <div className='text-2xl'>{time}</div>
+    <div className='text-9xl text-black'>{count}</div>
   )
+}
+
+
+function addzero(num){
+return num<10 ? `0${num}`:num
 }
