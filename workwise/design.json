@@ -1,10 +1,32 @@
-{
+[
+  {
+    "logo":{
+      "createdBy": "github-account",
+      "figma": "link to figma file"
+    },
+    "homePageDesign":{
+      "createdBy": "github-account",
+      "figma": "link to vector"
+    }
+  },
+  {
+    "logo":{
+      "createdBy": "ananyaa07",
+      "figma": "https://www.figma.com/file/TIiLoUvPltKR9jLefmsE3G/Untitled?node-id=0%3A1&t=wLfgHNIGd0w2VQvK-1"
+    },
+    "homePageDesign":{
+      "createdBy": "github-account",
+      "figma": "link to vector"
+  },
+  {
   "logo":{
     "createdBy": "RayLikesAnime",
     "figma": "https://www.figma.com/file/TmPk4eDvpTNaWF4ji4sw4n/logo?node-id=0%3A1&t=FWcWIpZdQEwpCxuS-1"
   },
   "homePageDesign":{
-    "createdBy": "github-account",
-    "figma": "link to vector"
-  }
-}
+      "createdBy": "github-account",
+      "figma": "link to vector"
+    }
+  }  
+]
+
