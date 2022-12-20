@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import homepage from "./pages/homepage";
 import './App.css';
 import Time from './components/Time'
 
@@ -7,8 +7,10 @@ function App() {
 		<div className="App">
 			<div className="msg  text-bold text-red-800">
 				<Time/>
+				<homepage/>
 			</div>
 		</div>
+
 	); 
 }
 
