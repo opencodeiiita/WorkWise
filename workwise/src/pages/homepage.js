@@ -7,6 +7,7 @@ import axios from 'axios'
 
 export default function Homepage() {
 
+  
   const [rendered, setRendered] = useState(false);
 
   const[url,setUrl]=useState("https://wallpapertag.com/wallpaper/full/c/1/4/145606-best-desktop-wallpaper-1920x1200-smartphone.jpg")
