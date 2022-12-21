@@ -16,7 +16,7 @@ export default function Date1()
       });
     
     return (
-        <div className='text-6xl'>
+        <div className='text-6xl md:text-4xl sm:text-3xl'>
             {text}
         </div>
     );
