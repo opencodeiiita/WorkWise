@@ -35,25 +35,38 @@ The app will be live on localhost:3000.
 * After the process is completed, run the command ```npm start```.
 * The website will be live on ```localhost:3000```.
 
+
+## Reference Links 
+- [Download and install the latest version of Git.](https://git-scm.com/downloads)
+- [Set your username in Git.](https://help.github.com/articles/setting-your-username-in-git)
+- [Set your commit email address in Git.](https://help.github.com/articles/setting-your-commit-email-address-in-git)
+
 ## Claim an Issue
 Comment on the issue. In case of no activity on the issue even after 2 days, the issue will be reassigned. If you have difficulty approaching the issue, feel free to ask on our discord channel.
+
+## Communication
+Whether you are working on a new feature or facing a doubt please feel free to ask us on our [discord](https://discord.gg/NApnCUwd) channel. We will be happy to help you out.
 
 ## Contributing
 We welcome contributions to WorkWise! If you would like to contribute, please follow these guidelines:
 
-* Claim an issue by commenting on it. If there is no activity on the issue for 2 days, it will be reassigned. If you need help with the issue, feel free to ask on our Discord channel.
-* If you are working on a new feature or have any questions, please ask on our Discord channel. We will be happy to help.
-* Follow the best practices and coding standards to make it easy for reviewers and contributors. Quality is more important than quantity.
-* Please make a separate commit for each change, and name the commit something meaningful (e.g. "Add user login feature" instead of "Update").
-* If your commit resolves an open issue, please reference the issue number in the commit message (e.g. "Fixes #12").
+* Follow the best practices and coding standards to make it easy for reviewers and contributors. We want to focus on the code quality more than on managing pull request ethics.
+
+* Single commit per pull request and name the commit something meaningful (e.g. "Add user login feature" instead of "Update").
+
+* If your commit resolves an open issue, please reference the issue number in the commit message (e.g. "Fixes #12"). Follow the [PR Template](https://github.com/opencodeiiita/WorkWise/blob/main/.github/pull_request_template.md) strictly.
+
 * Provide a link to a live demo or relevant screenshots for easier review.
-* Pull requests that have not received a response from the contributor for 3 days will be marked closed.
+
+* Pull Request older than 3 days with no response from the contributor shall be marked closed.
+
 * Do not create pull requests for changes that are not related to any open issues. Please create an issue first and wait for approval before working on it.
+
 * Avoid creating duplicate pull requests. If necessary, please comment on the original pull request with the number of the new one, and close the obsolete one yourself.
+
 * Be polite and respectful to other members of the community.
 
-## Communicate
-Whether you are working on a new feature or facing a doubt please feel free to ask us on our discord channel. We will be happy to help you out.
-
-## Communicate
-Whether you are working on a new feature or facing a doubt please feel free to ask us on our [discord](https://discord.gg/WEMwVqnr) channel. We will be happy to help you out.
+## Our Top Contributors ♥️
+<a href="https://github.com/opencodeiiita/WorkWise/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=opencodeiiita/WorkWise" />
+</a>
