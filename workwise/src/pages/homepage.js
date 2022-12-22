@@ -4,6 +4,7 @@ import Time from '../components/Time'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import Date from '../components/Date';
+import Quotes from '../components/Quotes';
 
 export default function Homepage() {
 
@@ -37,7 +38,7 @@ export default function Homepage() {
 				<Time/>
         <Date/>
 			</div>
-			
+			<Quotes />
 		</div>
      
     </div>
