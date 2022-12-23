@@ -18,14 +18,17 @@ const Weather = ({ cityName, apiKey }) => {
     <>
       {weatherData !== "" && (
         <>
-          <div className="text-lg w-36 absolute right-2 top-2 drop-shadow-[0_0_10px_black]">
+          <div className="text-lg w-36 sm:w-28 absolute right-2 top-2 drop-shadow-[0_0_10px_black] sm:right-0 sm:top-0">
             <img
               alt="weather"
               src={`icons/weather/${weatherData.weather[0].icon}.png`}
-              className="mx-auto h-16 w-16 invert mb-[2px]"
+              className="mx-auto h-16 w-16 invert mb-[2px] sm:mb-[-10px] sm:text-xs"
             />
-            {parseFloat(`${weatherData.main.temp - 273.15}`).toFixed(2)}°C |{" "}
-            {weatherData.weather[0].main}
+            <span>
+              {parseFloat(`${weatherData.main.temp - 273.15}`).toFixed(2)}°C
+            </span>
+
+            <span className="sm:hidden"> | {weatherData.weather[0].main}</span>
           </div>
         </>
       )}
