@@ -21,7 +21,7 @@ const Weather = ({cityName, apiKey}) => {
           <div className="text-lg w-36 absolute right-2 top-2 drop-shadow-[0_0_10px_black]">
             <img
               alt="weather"
-              src={`icons/weather/02d.png`}
+              src={`icons/weather/${weatherData.weather[0].icon}.png`}
               className="mx-auto h-16 w-16 invert mb-[2px]"
             />
             {parseFloat(`${weatherData.main.temp - 273.15}`).toFixed(2)}°C |{" "}
