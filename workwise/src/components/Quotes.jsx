@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Oval } from "react-loader-spinner";
+import isMobile from "../utils/isMobile";
 
 const Quotes = () => {
   const [loading, setLoading] = useState(true);
@@ -11,13 +12,16 @@ const Quotes = () => {
     try {
       // start loading
       setLoading(true);
+
       // fetching the quote from API
       const res = await axios.get(
-        "https://api.quotable.io/random?maxLength=60"
+        `https://api.quotable.io/random?maxLength=${isMobile ? "40" : "60"}`
       );
       const { content: quote, author } = res.data;
-      setQuoteText(quote + " - " + author);
+
+      setQuoteText(quote + (isMobile ? "" : " - " + author));
       setIsFadingOut(false);
+
       // stop loading
       setLoading(false);
     } catch (err) {
@@ -40,11 +44,11 @@ const Quotes = () => {
   }, []);
 
   return (
-    <div className="quote__container relative flex flex-col justify-center items-center py-3 px-7 min-w-4xl">
+    <div className="quote__container relative flex flex-col justify-center items-center py-3 sm:py-2 px-7 sm:px-4 min-w-4xl sm:w-70">
       {loading ? (
         <Oval
-          height={40}
-          width={40}
+          height={isMobile ? 25 : 40}
+          width={isMobile ? 25 : 40}
           color="black"
           strokeWidth={2}
           strokeWidthSecondary={2}
@@ -53,7 +57,7 @@ const Quotes = () => {
         <>
           <div className="quote__bg absolute w-full h-full bg-white z-10 opacity-80 rounded-xl " />
           <div
-            className={`quote__text z-20 text-black text-center text-2xl font-light ${
+            className={`quote__text z-20 text-black text-center text-2xl sm:text-base font-light ${
               isFadingOut ? "quote__text--fadeout" : "quote__text"
             }`}
           >
