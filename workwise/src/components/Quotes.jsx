@@ -44,7 +44,7 @@ const Quotes = () => {
   }, []);
 
   return (
-    <div className="quote__container relative flex flex-col justify-center items-center py-3 sm:py-2 px-7 sm:px-4 min-w-4xl sm:w-70">
+    <div className="quote__container relative flex flex-col justify-center items-center py-3 sm:py-2 px-7 sm:px-4 min-w-4xl sm:w-65">
       {loading ? (
         <Oval
           height={isMobile ? 25 : 40}
@@ -55,9 +55,9 @@ const Quotes = () => {
         />
       ) : (
         <>
-          <div className="quote__bg absolute w-full h-full bg-white z-10 opacity-80 rounded-xl " />
+          <div className="quote__bg absolute w-full h-full z-10 opacity-80 rounded-xl " />
           <div
-            className={`quote__text z-20 text-black text-center text-2xl sm:text-base font-light ${
+            className={`quote__text z-20 text-white text-center text-2xl sm:text-base font-semibold font-light ${
               isFadingOut ? "quote__text--fadeout" : "quote__text"
             }`}
           >

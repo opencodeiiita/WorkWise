@@ -29,8 +29,14 @@
 }
 
 .quote__bg {
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
+  background: rgba(175, 175, 175, 0.85);
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .quote__bg {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
 }
 
 .quote__text {
