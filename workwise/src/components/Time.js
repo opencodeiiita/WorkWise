@@ -15,7 +15,7 @@ export default function Time() {
   });
     
     return (
-    <div className='text-9xl text-white font-bold'>{count}</div>
+    <div className='text-9xl text-white font-bold drop-shadow-[0_0_10px_black]'>{count}</div>
   )
 }
 
