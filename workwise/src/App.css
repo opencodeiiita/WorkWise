@@ -4,7 +4,7 @@
   display: flex;
   height: 100vh;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items:center;
   font-size: 2em;
   flex-wrap: wrap;
@@ -21,4 +21,65 @@
 
 .steps li{
   margin-top: 1em;
+}
+
+/* css for Quotes component */
+.quote__container {
+  margin: 38vh 0 20px 0;
+}
+
+.quote__bg {
+  background: rgba(175, 175, 175, 0.85);
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .quote__bg {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+}
+
+.quote__text {
+  -webkit-animation: fadein 1.5s linear forwards;
+  animation: fadein 1.5s linear forwards;
+}
+.quote__text--fadeout {
+  -webkit-animation: fadeout 1.5s linear forwards;
+  animation: fadeout 1.5s linear forwards;
+}
+
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

@@ -1,10 +1,11 @@
-import React from "react";
-import "../App.css";
-import Time from "../components/Time";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Date from "../components/Date";
+import React from 'react'
+import '../App.css';
+import Time from '../components/Time'
+import {useState,useEffect} from 'react'
+import axios from 'axios'
+import Date from '../components/Date';
 import Weather from "../components/Weather";
+import Quotes from '../components/Quotes';
 
 export default function Homepage() {
   const [rendered, setRendered] = useState(false);
@@ -35,14 +36,15 @@ export default function Homepage() {
     >
       <div className="App">
         <div className="msg  text-bold text-white">
-          <Time />
-          <Date />
+          <Time/>
+          <Date/>
           <Weather
-            cityName={"mumbai"} //This is a temporary name we can have different city names.
-            apiKey={""} //fill the api key here to make the widget work.
-          />
+              cityName={"mumbai"} //This is a temporary name we can have different city names.
+              apiKey={""} //fill the api key here to make the widget work.
+            />
         </div>
-      </div>
+        <Quotes />
+		  </div>
     </div>
   );
 }
