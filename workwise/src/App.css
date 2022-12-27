@@ -22,6 +22,13 @@
   margin-top: 1em;
 }
 
+.ant-modal {
+  backdrop-filter: blur(100px) !important;
+  height: 150px !important;
+}
+.ant-input::placeholder{
+  color: #ffffffcc !important;
+}
 .ant-modal-content {
   background-color: #d9d9d94c !important;
 }
