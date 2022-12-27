@@ -1,10 +1,11 @@
-import React from "react";
-import "../App.css";
-import Time from "../components/Time";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Date from "../components/Date";
+import React from 'react'
+import '../App.css';
+import Time from '../components/Time'
+import {useState,useEffect} from 'react'
+import axios from 'axios'
+import Date from '../components/Date';
 import Weather from "../components/Weather";
+import Quotes from '../components/Quotes';
 import Bookmark from "../components/Bookmark";
 
 export default function Homepage() {
@@ -36,15 +37,16 @@ export default function Homepage() {
     >
       <div className="App">
         <div className="msg  text-bold text-white">
-          <Time />
-          <Date />
+          <Time/>
+          <Date/>
           <Weather
             cityName={"mumbai"} //This is a temporary name we can have different city names.
             apiKey={"a045d78dfc153d0c97dd1e87653d1ced"} //fill the api key here to make the widget work.
           />
           <Bookmark />
         </div>
-      </div>
+        <Quotes />
+		  </div>
     </div>
   );
 }
