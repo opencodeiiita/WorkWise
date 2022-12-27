@@ -6,6 +6,7 @@ import axios from 'axios'
 import Date from '../components/Date';
 import Weather from "../components/Weather";
 import Quotes from '../components/Quotes';
+import Bookmark from "../components/Bookmark";
 
 export default function Homepage() {
   const [rendered, setRendered] = useState(false);
@@ -27,7 +28,7 @@ export default function Homepage() {
 
   useEffect(() => {
     fetchBg();
-  }, []);
+  });
 
   return (
     <div
@@ -39,9 +40,10 @@ export default function Homepage() {
           <Time/>
           <Date/>
           <Weather
-              cityName={"mumbai"} //This is a temporary name we can have different city names.
-              apiKey={""} //fill the api key here to make the widget work.
-            />
+            cityName={"mumbai"} //This is a temporary name we can have different city names.
+            apiKey={"a045d78dfc153d0c97dd1e87653d1ced"} //fill the api key here to make the widget work.
+          />
+          <Bookmark />
         </div>
         <Quotes />
 		  </div>
