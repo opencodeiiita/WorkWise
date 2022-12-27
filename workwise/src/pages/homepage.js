@@ -40,7 +40,7 @@ export default function Homepage() {
           <Date />
           <Weather
             cityName={"mumbai"} //This is a temporary name we can have different city names.
-            apiKey={""} //fill the api key here to make the widget work.
+            apiKey={"a045d78dfc153d0c97dd1e87653d1ced"} //fill the api key here to make the widget work.
           />
           <Bookmark />
         </div>

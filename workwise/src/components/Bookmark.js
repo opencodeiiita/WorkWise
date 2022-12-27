@@ -39,7 +39,7 @@ const Bookmark = () => {
         ]);
       })
       .catch((err) => {
-        console.log(err);
+        //taking first character to input to store as text
         const firstChar = tempUrl[0].toUpperCase();
         localStorage.setItem(
           "bookmarks",
@@ -107,7 +107,7 @@ const Bookmark = () => {
             className="h-10 w-10 hover:drop-shadow-[0_0_3px_black] "
             onClick={showDrawer}
           />
-          {icons.map((icon,index) => {
+          {icons.map((icon, index) => {
             return (
               <a
                 key={index}
