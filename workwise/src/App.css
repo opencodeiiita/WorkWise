@@ -1,25 +1,24 @@
-
 .App {
   font: 400;
   display: flex;
   height: 100vh;
   flex-direction: column;
   justify-content: flex-end;
-  align-items:center;
+  align-items: center;
   font-size: 2em;
   flex-wrap: wrap;
   text-align: center;
 }
 
-.msg{
+.msg {
   width: 100vw;
 }
 
-.steps{
+.steps {
   width: 55%;
 }
 
-.steps li{
+.steps li {
   margin-top: 1em;
 }
 
@@ -48,6 +47,10 @@
   animation: fadeout 1.5s linear forwards;
 }
 
+.calendar-icon {
+  width: 2rem;
+  height: 2rem;
+}
 @-webkit-keyframes fadein {
   0% {
     opacity: 0;
