@@ -3,8 +3,6 @@ import { BadgeProps } from "antd";
 import { Badge, Calendar } from "antd";
 import { Dayjs } from "dayjs";
 
-
-
 const getMonthData = (value = Dayjs) => {
   if (value.month() === 8) {
     return 1394;
@@ -22,9 +20,17 @@ const CalendarComponent = () => {
     ) : null;
   };
 
-
-
-  return <Calendar className=""  monthCellRender={monthCellRender} />;
+  return (
+    <>
+     
+        <Calendar
+          className="w-1/1 p-3"
+          fullscreen={false}
+          monthCellRender={monthCellRender}
+        />
+     
+    </>
+  );
 };
 
 export default CalendarComponent;

@@ -126,3 +126,25 @@
     opacity: 0;
   }
 }
+
+.calendar-position{
+  position: relative !important;
+  width: auto !important;
+  height: auto !important;
+}
+.calendar{
+  position: fixed;
+  right: 1%;
+  top: 20% !important;
+  width: 25%;
+}
+
+@media only screen and (max-width: 600px) {
+  .calendar{
+    position: fixed;
+    right: 1%;
+    top: 40% !important;
+    width: 70%;
+    height: 50%;
+  }
+}
