@@ -50,13 +50,7 @@ export default function Homepage() {
         <BsFillCalendarDateFill color="white " className="calendar-icon" />
       </button>
 
-      <div
-        className="App"
-        onClick={() => {
-          showModal ? setShowModal(false) : setShowModal(true);
-          console.log(showModal);
-        }}
-      >
+      <div className="App">
         <div className="msg  text-bold text-white">
           <Time />
           <Date />
