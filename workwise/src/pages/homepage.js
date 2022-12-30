@@ -8,6 +8,9 @@ import Weather from "../components/Weather";
 import Quotes from "../components/Quotes";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
+import Bookmark from "../components/Bookmark";
+
+
 export default function Homepage() {
   const [rendered, setRendered] = useState(false);
 
@@ -28,14 +31,14 @@ export default function Homepage() {
 
   useEffect(() => {
     fetchBg();
-  }, []);
+  });
 
   return (
     <div
       className=" image w-full h-screen bg-no-repeat bg-cover"
       style={{ backgroundImage: `url(${url})` }}
     >
-      <button className="absolute py-6 sm:py-2 px-6 sm:px-4 min-w-4xl sm:w-65 ">
+      <button className="absolute bottom-0 right-0 py-6 sm:py-2 px-6 sm:px-4 min-w-4xl sm:w-65 ">
         <NavLink to="/calendar">
           <BsFillCalendarDateFill color="white " className="calendar-icon" />
         </NavLink>
@@ -46,8 +49,9 @@ export default function Homepage() {
           <Date />
           <Weather
             cityName={"mumbai"} //This is a temporary name we can have different city names.
-            apiKey={""} //fill the api key here to make the widget work.
+            apiKey={"a045d78dfc153d0c97dd1e87653d1ced"} //fill the api key here to make the widget work.
           />
+          <Bookmark />
         </div>
         <Quotes />
       </div>
