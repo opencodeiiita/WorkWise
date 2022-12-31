@@ -1,25 +1,23 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 export default function Time() {
-
-  const [count, setCount] = useState("");
+  const [time, setTime] = useState('');
 
   useEffect(() => {
-    setTimeout(() => {
+    const interval = setInterval(() => {
       let today = new Date();
       let hrs = addzero(today.getHours());
       let min = addzero(today.getMinutes());
       // let sec = addzero(today.getSeconds());
-      setCount((count) => count = `${hrs}:${min}`);
+      setTime(`${hrs}:${min}`);
     }, 1000);
-  });
-    
-    return (
-    <div className='text-9xl text-white font-bold drop-shadow-[0_0_10px_black]'>{count}</div>
-  )
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <div className='text-9xl text-white font-bold drop-shadow-[0_0_10px_black]'>{time}</div>;
 }
 
-
-function addzero(num){
-return num<10 ? `0${num}`:num
+function addzero(num) {
+  return num < 10 ? `0${num}` : num;
 }
