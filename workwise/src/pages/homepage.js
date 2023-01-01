@@ -7,7 +7,7 @@ import Date from '../components/Date';
 import Weather from "../components/Weather";
 import Quotes from '../components/Quotes';
 import Bookmark from "../components/Bookmark";
-
+import Image from 'rc-image';
 export default function Homepage() {
   const [rendered, setRendered] = useState(false);
 
@@ -32,9 +32,12 @@ export default function Homepage() {
 
   return (
     <div
-      className=" image w-full h-screen bg-no-repeat bg-cover"
-      style={{ backgroundImage: `url(${url})` }}
+      className="image w-full h-screen bg-no-repeat bg-cover"
+      // style={{ backgroundImage: `url(${url})` }}
     >
+      <Image 
+      className='w-full h-screen absolute'
+      src={url}/>
       <div className="App">
         <div className="msg  text-bold text-white">
           <Time/>

@@ -11,6 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.toggleslide:hover
+{
+    opacity: 100%;
+
+}
 
 @tailwind base;
 @tailwind components;
