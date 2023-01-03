@@ -49,7 +49,7 @@ export default function Kanban() {
     const currentTouch = e.screenX;
     const diff = touchDown - currentTouch;
 
-    if (diff < -0.5) {
+    if (diff < -5) {
       navigate("/");
     }
 
