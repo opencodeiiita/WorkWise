@@ -4,7 +4,7 @@
   height: 100vh;
   flex-direction: column;
   justify-content: flex-end;
-  align-items:center;
+  align-items: center;
   font-size: 2em;
   flex-wrap: wrap;
   text-align: center;
@@ -87,6 +87,10 @@
   animation: fadeout 1.5s linear forwards;
 }
 
+.calendar-icon {
+  width: 2rem;
+  height: 2rem;
+}
 @-webkit-keyframes fadein {
   0% {
     opacity: 0;
@@ -120,5 +124,27 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+.calendar-position{
+  position: relative !important;
+  width: auto !important;
+  height: auto !important;
+}
+.calendar{
+  position: fixed;
+  right: 1%;
+  top: 27% !important;
+  width: 25%;
+}
+
+@media only screen and (max-width: 600px) {
+  .calendar{
+    position: fixed;
+    right: 1%;
+    top: 40% !important;
+    width: 70%;
+    height: 50%;
   }
 }
