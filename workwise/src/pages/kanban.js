@@ -1,13 +1,74 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useState } from "react";
 
 const kanban = () => {
+  let navigate = useNavigate();
+
+  const [touchPosition, setTouchPosition] = useState(null);
+
+  const handleTouchStart = (e) => {
+    const touchDown = e.touches[0].clientX;
+    setTouchPosition(touchDown);
+  };
+
+  const handleMouseDown = (e) => {
+    const touchDown = e.screenX;
+    setTouchPosition(touchDown);
+  };
+
+  const handleTouchMove = (e) => {
+    const touchDown = touchPosition;
+
+    if (touchDown === null) {
+      return;
+    }
+
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchDown - currentTouch;
+
+    if (diff < -5) {
+      navigate("/");
+    }
+
+    // if (diff < -5) {
+    // 	prev();
+    // }
+
+    setTouchPosition(null);
+  };
+
+  const handleMouseMove = (e) => {
+    const touchDown = touchPosition;
+
+    if (touchDown === null) {
+      return;
+    }
+
+    const currentTouch = e.screenX;
+    const diff = touchDown - currentTouch;
+
+    if (diff < -0.5) {
+      navigate("/");
+    }
+
+    // if (diff < -5) {
+    // 	prev();
+    // }
+
+    setTouchPosition(null);
+  };
   return (
     <motion.div
       initial={{ x: window.innerWidth }}
       animate={{ x: 0, transition: { type: "tween" } }}
       exit={{ x: window.innerWidth, opacity: 0, transition: { delay: 0.25 } }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
       className="h-[100vh] overflow-hidden bg-red-500 absolute w-[100vw]"
     >
       <Link to="/">

@@ -6,15 +6,69 @@ import Date from "../components/Date";
 import Weather from "../components/Weather";
 import Quotes from "../components/Quotes";
 import { BsFillCalendarDateFill } from "react-icons/bs";
-
 import Bookmark from "../components/Bookmark";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import CalendarComponent from "../components/Calendar";
 
 export default function Homepage({ url }) {
   const [showModal, setShowModal] = useState(false);
+  let navigate = useNavigate();
+
+  const [touchPosition, setTouchPosition] = useState(null);
+
+  const handleTouchStart = (e) => {
+    const touchDown = e.touches[0].clientX;
+    setTouchPosition(touchDown);
+  };
+
+  const handleMouseDown = (e) => {
+    const touchDown = e.screenX;
+    setTouchPosition(touchDown);
+  };
+
+  const handleTouchMove = (e) => {
+    const touchDown = touchPosition;
+
+    if (touchDown === null) {
+      return;
+    }
+
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchDown - currentTouch;
+
+    if (diff > 5) {
+      navigate("/kanban");
+    }
+
+    // if (diff < -5) {
+    // 	prev();
+    // }
+
+    setTouchPosition(null);
+  };
+
+  const handleMouseMove = (e) => {
+    const touchDown = touchPosition;
+
+    if (touchDown === null) {
+      return;
+    }
+
+    const currentTouch = e.screenX;
+    const diff = touchDown - currentTouch;
+
+    if (diff > 0.5) {
+      navigate("/kanban");
+    }
+
+    // if (diff < -5) {
+    // 	prev();
+    // }
+
+    setTouchPosition(null);
+  };
 
   return (
     <motion.div
@@ -23,6 +77,10 @@ export default function Homepage({ url }) {
       initial={{ x: -window.innerWidth }}
       animate={{ x: 0, transition: { type: "tween" } }}
       // transition={{ type: "tween" }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
       exit={{ x: -window.innerWidth, opacity: 0, transition: { delay: 1 } }}
     >
       <button
