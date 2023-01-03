@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 
-const kanban = () => {
+export default function Kanban() {
   let navigate = useNavigate();
 
   const [touchPosition, setTouchPosition] = useState(null);
@@ -54,7 +54,7 @@ const kanban = () => {
     }
 
     // if (diff < -5) {
-    // 	prev();
+    // 	prev();j
     // }
 
     setTouchPosition(null);
@@ -86,6 +86,4 @@ const kanban = () => {
       kanban
     </motion.div>
   );
-};
-
-export default kanban;
+}

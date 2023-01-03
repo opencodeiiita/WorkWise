@@ -1,5 +1,5 @@
 import Homepage from "./pages/homepage.js";
-import Kanban from "./pages/kanban.js";
+import Kanban from "./pages/Kanban.js";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
