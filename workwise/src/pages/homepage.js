@@ -59,7 +59,7 @@ export default function Homepage({ url }) {
     const currentTouch = e.screenX;
     const diff = touchDown - currentTouch;
 
-    if (diff > 0.5) {
+    if (diff > -0.5) {
       navigate("/kanban");
     }
 
@@ -81,7 +81,7 @@ export default function Homepage({ url }) {
       onTouchMove={handleTouchMove}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
-      exit={{ x: -window.innerWidth, opacity: 0, transition: { delay: 1 } }}
+      exit={{ x: -window.innerWidth, opacity: 0, transition: { delay: 0.25 } }}
     >
       <button
         className="absolute bottom-0 right-0 py-6 sm:py-2 px-6 sm:px-4  transition
