@@ -7,9 +7,19 @@ export default ()=>
 {
     const [dark,setDark]=useState(false);
     const [items,setItems]=useState([]);
+
+   function saved(){
+    let tempObj=[];
+    for(let i=0;i<localStorage.length;i++)
+    {
+        tempObj.push(<SItem key={i} keyno={i}/>)
+    }
+    setItems(tempObj);
+   }
+
     let addItem = ()=>{
         let n=items.length;
-        setItems(items.concat(<SItem key={n}/>));
+        setItems(items.concat(<SItem key={n} keyno={n}/>));
     }
     let Slide=(e)=>{
         let x=document.querySelector(".sidebar");
@@ -21,11 +31,13 @@ export default ()=>
                 child[i].classList.add("hidden");
             }
         }
-        x.classList.replace('w-[min(350px,35vw)]','w-14');
+        x.classList.replace('w-[min(300px,33vw)]','w-14');
         child[2].classList.remove('hidden');
     }
     let openUp=(e)=>
     {
+        e.target.parentElement.previousSibling.classList.replace("opacity-50","opacity-0");
+        console.log(e.target.parentElement.previousSibling.classList)
         let x=document.querySelector(".sidebar");
         let child=x.childNodes;
         for(let i=0;i<child.length;i++)
@@ -35,7 +47,7 @@ export default ()=>
                 child[i].classList.remove("hidden");
             }
         }
-        x.classList.replace('w-14','w-[min(350px,35vw)]');
+        x.classList.replace('w-14','w-[min(300px,33vw)]');
         child[2].classList.add('hidden');
 
     }
@@ -62,20 +74,21 @@ export default ()=>
         setDark(!dark);
     }
     return (
-        <div className="sidebar h-[100vh] w-[min(350px,35vw)] transition-all text-[min(4vw,45px)]
+        <div className="z-50 sidebar h-[100vh] w-[min(300px,33vw)] transition-all text-[min(4vw,30px)]
         shadow-md shadow-black fixed
-        
-        ">
-            <div className="font-bold  h-10
+        "
+        onLoad={saved}
+        >
+            <div className="font-bold  h-10 cursor-pointer
             flex mt-8 w-4/5 ml-auto mr-auto select-none items-center
-            " >
+            " onMouseEnter={(e)=>{e.target.nextSibling.classList.replace("opacity-0","opacity-50")}}>
                     <img 
                     className="h-[min(4vw,40px)] mx-2"
                     src={icon} alt="image not found"/>
                     WorkWise
             </div>
             <div 
-                className="toggleslide flex absolute left-[10%] cursor-pointer justify-center items-center h-10 top-8 w-4/5 bg-white outline opacity-0 rounded-3xl transition"
+                className="flex toggleslide absolute right-[2%] cursor-pointer justify-center items-center h-10 top-8  opacity-0 rounded-3xl transition"
                 onClick={Slide}
             >
                     <IoIosArrowRoundBack/>
