@@ -74,7 +74,7 @@ export default ()=>
         setDark(!dark);
     }
     return (
-        <div className="z-50 sidebar h-[100vh] w-[min(300px,33vw)] transition-all text-[min(4vw,30px)]
+        <div className="sidebar h-[100vh] w-[min(300px,33vw)] transition-all text-[min(4vw,30px)]
         shadow-md shadow-black fixed
         "
         onLoad={saved}
