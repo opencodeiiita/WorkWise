@@ -52,13 +52,15 @@ export default ()=>
 
     }
     let themechange=(e)=>{
+        let x=document.querySelector(".themeslider");
         if(dark)
         {
-            e.target.classList.replace("left-[58%]","left-5")
+            x.classList.replace("left-[58%]","left-5")
             setTimeout(()=>{
-                e.target.classList.remove("mix-blend-difference");
-                e.target.classList.remove("bg-white");
-                e.target.previousSibling.previousSibling.classList.add("bg-white")
+                x.classList.remove("mix-blend-difference");
+                x.classList.remove("bg-white");
+                e.target.classList.add("bg-white")
+                // e.target.previousSibling.previousSibling.classList.add("bg-white")
             },100);
 
 
@@ -66,10 +68,11 @@ export default ()=>
         }
         else
         {
-            e.target.classList.replace("left-5","left-[58%]");
-            e.target.classList.add("mix-blend-difference");
-            e.target.classList.add("bg-white");
-            e.target.previousSibling.previousSibling.classList.remove("bg-white")
+            x.classList.replace("left-5","left-[58%]");
+            x.classList.add("mix-blend-difference");
+            x.classList.add("bg-white");
+            e.target.previousSibling.classList.remove("bg-white")
+            // e.target.previousSibling.previousSibling.classList.remove("bg-white")
         }
         setDark(!dark);
     }
@@ -81,7 +84,9 @@ export default ()=>
         >
             <div className="font-bold  h-10 cursor-pointer
             flex mt-8 w-4/5 ml-auto mr-auto select-none items-center
-            " onMouseEnter={(e)=>{e.target.nextSibling.classList.replace("opacity-0","opacity-50")}}>
+            " onMouseEnter={(e)=>{e.target.nextSibling.classList.replace("opacity-0","opacity-50")}}
+            onMouseLeave={(e)=>{e.target.nextSibling.classList.replace("opacity-50","opacity-0")}}
+            >
                     <img 
                     className="h-[min(4vw,40px)] mx-2"
                     src={icon} alt="image not found"/>
@@ -103,7 +108,7 @@ export default ()=>
         <div className="projects
         w-4/5 ml-auto mr-auto mt-12 p-3
         ">
-            <div className="font-bold mb-3 text-[.5em]">
+            <div className="font-bold mb-3 text-[.6em]">
                     Projects
             </div>
             {items}
@@ -116,10 +121,13 @@ export default ()=>
             </div>
         </div>
         <div className="select-none items-center justify-around flex text-[min(.5em,15px)] bg-[#f2f1f6] h-10 w-4/5 absolute bottom-10 rounded-full left-[8%] ">
-            <div className="h-[70%] rounded-full bg-white items-center w-1/3 flex justify-center">Light</div>
-            <div className="h-[70%] rounded-full items-center w-1/3 flex justify-center">Dark</div>
-            <div className="absolute w-1/3 left-5 h-[70%] cursor-pointer transition-all  rounded-full "
-                onClick={themechange}
+            <div className="h-[70%] cursor-pointer rounded-full bg-white items-center w-1/3 flex justify-center"
+            onClick={themechange}
+            >Light</div>
+            <div className="h-[70%] cursor-pointer rounded-full items-center w-1/3 flex justify-center"
+            onClick={themechange}
+            >Dark</div>
+            <div className="themeslider absolute w-1/3 left-5 h-[70%] cursor-pointer transition-all  rounded-full "
             ></div>
         </div>
         </div>
