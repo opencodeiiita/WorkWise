@@ -1,4 +1,5 @@
 import Homepage from "./pages/homepage.js";
+
 import Kanban from "./pages/Kanban.js";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -45,6 +46,7 @@ function AnimatedRoutes() {
           <Route path="/kanban" element={<Kanban />}></Route>
         </Routes>
       </AnimatePresence>
+
     </>
   );}
 
