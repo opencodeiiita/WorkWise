@@ -46,7 +46,6 @@ function AnimatedRoutes() {
         </Routes>
       </AnimatePresence>
     </>
-  );
-}
+  );}
 
 export default App;
