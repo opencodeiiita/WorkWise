@@ -7,7 +7,7 @@ function Card(props){
     const dateFormat = 'YYYY-MM-DD';
     return(
         <div className="w-64 m-4 h-max bg-gray-50 rounded-lg overflow-hidden">
-            <div className="m-4">
+            <div className="ml-4 mt-4 mb-2">
                 {card.category==='Research' &&
                     <span class="inline-block bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2">{card.category}</span>
                 }
@@ -27,18 +27,18 @@ function Card(props){
                 </div>
             }
             {card.imgUrl &&
-                <div className="px-5 py-4">
-                    <div className="font-bold text-base mb-2">{card.heading}</div>
+                <div className="px-5 pt-4">
+                    <div className="font-bold text-base mb-1">{card.heading}</div>
                     <p className="text-gray-700 text-base">{card.desc}</p>
                 </div>
             }
             {!card.imgUrl &&
                 <div className="px-5">
-                    <div className="font-bold text-base mb-2">{card.heading}</div>
+                    <div className="font-bold text-base mb-1">{card.heading}</div>
                     <p className="text-gray-700 text-base">{card.desc}</p>
                 </div>
             }
-            <div className="flex justify-between px-5 pt-2 pb-2">
+            <div className="flex justify-between px-5 pt-3">
             {/* <span class="border-2 border-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-900 mr-2 mb-2">{card.date}</span> */}
             <div class="rounded w-32 py-1 text-sm font-semibold text-gray-900 mb-2">
                 <DatePicker defaultValue={dayjs(card.date, dateFormat)} format={dateFormat} />
