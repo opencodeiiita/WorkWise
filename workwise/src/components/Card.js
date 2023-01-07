@@ -42,10 +42,16 @@ function Card(props){
                 </div>
             }
             <div className="flex justify-between px-5 pt-3">
-            {/* <span class="border-2 border-gray-200 rounded px-3 py-1 text-sm font-semibold text-gray-900 mr-2 mb-2">{card.date}</span> */}
-            <div class="rounded w-32 py-1 text-sm font-medium font-body text-gray-900 mb-2">
-                <DatePicker defaultValue={dayjs(card.date, dateFormat)} format={dateFormat2} />
-            </div>
+            {card.date &&
+                <div class="rounded w-32 py-1 text-sm font-medium font-body text-gray-900 mb-2">
+                    <DatePicker defaultValue={dayjs(card.date, dateFormat)} format={dateFormat2} />
+                </div>
+            }
+            {!card.date && 
+                <div class="rounded w-32 py-1 text-sm font-medium font-body text-gray-900 mb-2">
+                    <DatePicker defaultValue={dayjs()} format={dateFormat2} />
+                </div>
+            }
             {card.priority==='High' &&
                 <span class="bg-red-200 flex place-items-center rounded-full w-12 h-6 text-sm font-semibold text-red-700 px-2 mt-2">{card.priority}</span>
             }
