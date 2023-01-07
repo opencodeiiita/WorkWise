@@ -1,7 +1,7 @@
 [
     {
         "id" : "dncvjdn",
-        "category" : "Research",
+        "tags" : ["Research","Content"],
         "imgUrl" : "https://picsum.photos/seed/picsum/200/300",
         "heading" : "This is heading",
         "desc" : "This is the description",
@@ -10,7 +10,7 @@
     },
     {
         "id" : "mdcnddvjdn",
-        "category" : "Design",
+        "tags" : ["Design"],
         "heading" : "This is heading 2",
         "desc" : "This is the description 2",
         "date" : "1996-02-16",
@@ -18,7 +18,7 @@
     },
     {
         "id" : "dndmej",
-        "category" : "Planning",
+        "tags" : ["Planning"],
         "imgUrl" : "https://picsum.photos/seed/picsum/200/300",
         "heading" : "This is heading 3",
         "desc" : "This is the description 3",
