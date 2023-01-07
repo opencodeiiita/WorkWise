@@ -8,7 +8,7 @@ function Card(props){
     const dateFormat2 = 'MMM DD, YYYY';
     return(
         <div className="w-72 m-4 h-max bg-gray-50 rounded-lg overflow-hidden">
-            <div className="flex justify-start ml-4 mt-4 mb-2">
+            <div className="tags flex justify-start ml-4 mr-4 mt-4 mb-2 overflow-x-scroll">
                 {card.tags.map((item,index) => {
                     if(item==='Research'){
                         return (<span key={index} class="inline-block bg-blue-500 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2">{item}</span>);
