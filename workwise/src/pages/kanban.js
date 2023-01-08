@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 
 export default function Kanban() {
@@ -84,6 +84,7 @@ export default function Kanban() {
 				</div>
 			</Link>
 			<Sidebar/>
+			<Outlet/>
 		</motion.div>
 	);
 }
