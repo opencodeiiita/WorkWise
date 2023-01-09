@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Cards from './components/Cards.js'
+import Cards from "./components/Cards.js";
+import KanbanSection from "./components/KanbanSection.js";
 function App() {
   return (
     <>
@@ -43,11 +44,14 @@ function AnimatedRoutes() {
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Homepage url={url} />}></Route>
-          <Route path="/kanban" element={<Kanban />}></Route>
+          <Route path="/kanban" element={<Kanban />}>
+            <Route path=":section" element={<KanbanSection />} />
+          </Route>
           <Route path="/Cards" element={<Cards />}></Route>
         </Routes>
       </AnimatePresence>
     </>
-  );}
+  );
+}
 
 export default App;
