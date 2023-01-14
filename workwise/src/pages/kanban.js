@@ -6,72 +6,10 @@ import Sidebar from "../components/Sidebar";
 
 export default function Kanban() {
 	let navigate = useNavigate();
-
-	const [touchPosition, setTouchPosition] = useState(null);
-
-	const handleTouchStart = (e) => {
-		const touchDown = e.touches[0].clientX;
-		setTouchPosition(touchDown);
-	};
-
-	const handleMouseDown = (e) => {
-		const touchDown = e.screenX;
-		setTouchPosition(touchDown);
-	};
-
-	const handleTouchMove = (e) => {
-		const touchDown = touchPosition;
-
-		if (touchDown === null) {
-			return;
-		}
-
-		const currentTouch = e.touches[0].clientX;
-		const diff = touchDown - currentTouch;
-
-		if (diff < -5) {
-			navigate("/");
-		}
-
-		// if (diff < -5) {
-		// 	prev();
-		// }
-
-		setTouchPosition(null);
-	};
-
-	const handleMouseMove = (e) => {
-		const touchDown = touchPosition;
-
-		if (touchDown === null) {
-			return;
-		}
-
-		const currentTouch = e.screenX;
-		const diff = touchDown - currentTouch;
-
-		if (diff < -5) {
-			navigate("/");
-		}
-
-		// if (diff < -5) {
-		// 	prev();j
-		// }
-
-		setTouchPosition(null);
-	};
 	return (
-		<motion.div
-			initial={{ x: window.innerWidth }}
-			animate={{ x: 0, transition: { type: "tween" } }}
-			exit={{ x: window.innerWidth, opacity: 0, transition: { delay: 0.25 } }}
-			onTouchStart={handleTouchStart}
-			onTouchMove={handleTouchMove}
-			onMouseDown={handleMouseDown}
-			onMouseMove={handleMouseMove}
-		>
+		<motion.div>
 			<Link to="/">
-				<div className="absolute left-8 top-[50%] h-16 w-16 scale-50 rounded-full  rotate-180">
+				<div className="absolute left-8 top-[50%] h-16 w-16 scale-50 rounded-full  rotate-180 z-10">
 					<svg
 						width={"100%"}
 						height={"100%"}

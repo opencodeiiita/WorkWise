@@ -13,7 +13,7 @@ const KanbanSection = () => {
   //   JSON.stringify({
   //     title: "test",
   //     description: "text",
-  //     others: "no",
+  //     others: "no", 
   //   })
   // );ui
   // console.log(JSON.parse(localStorage.getItem(params.section)));
