@@ -1,16 +1,27 @@
-import React from 'react';
-import cardsData from '../utils/cards.json';
-import Card from './Card.js';
+import React from "react";
+// import cardsData from "../utils/cards.json";
+import Card from "./Card.js";
+import { Droppable } from "react-beautiful-dnd";
 
-function Cards() {
+function Cards(props) {
   return (
-    <body className='min-h-screen bg-gray-200'>
-      <div className="flex justify-start">
-      {cardsData.map((item,index) => (
-          <Card key={index} card={item} />
-      ))}
-    </div>
-    </body>
+    <Droppable droppableId={`${props.id}`}>
+      {/* key={props.id} */}
+      {(provided) => (
+        <div
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+          className="min-h-screen"
+        >
+          <div className="flex justify-start flex-col">
+            {props.data.map((item, index) => (
+              <Card key={item.id} card={item} index={index} />
+            ))}
+          </div>
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
   );
 }
 
