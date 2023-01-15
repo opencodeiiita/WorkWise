@@ -81,6 +81,7 @@ const Bookmark = () => {
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         okText="Add"
+        className="hs"
       >
         <Input
           className="mt-8 bg-[#D9D9D94C] text-white"

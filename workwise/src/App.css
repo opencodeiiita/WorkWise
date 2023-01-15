@@ -22,26 +22,26 @@
   margin-top: 1em;
 }
 
-.ant-modal {
+.hs .ant-modal {
   backdrop-filter: blur(100px) !important;
   height: 150px !important;
 }
-.ant-input::placeholder{
+.hs .ant-input::placeholder{
   color: #ffffffcc !important;
 }
-.ant-modal-content {
+.hs .ant-modal-content {
   background-color: #d9d9d94c !important;
 }
-.ant-btn-primary {
+.hs .ant-btn-primary {
   background-color: #d9d9d97c !important;
 }
-.ant-btn-default {
+.hs .ant-btn-default {
   color: white !important;
 }
-.ant-btn-default:hover {
+.hs .ant-btn-default:hover {
   border-color: #d9d9d97c !important;
 }
-.ant-btn-primary:hover {
+.hs .ant-btn-primary:hover {
   background-color: grey !important;
 }
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import Columns from "../components/ColumnsList";
 
 export default function Kanban() {
 	let navigate = useNavigate();
