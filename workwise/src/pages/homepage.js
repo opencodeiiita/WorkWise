@@ -214,7 +214,7 @@ export default function Homepage({ url }) {
                     span: 16,
                   }}
                 >
-                  <Button className="text-black text-body" type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit">
                     Submit
                   </Button>
                 </Form.Item>

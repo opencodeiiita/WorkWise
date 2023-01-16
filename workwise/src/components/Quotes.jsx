@@ -57,7 +57,7 @@ const Quotes = () => {
         <>
           <div className="quote__bg absolute w-full h-full z-10 opacity-75 rounded-xl " />
           <div
-            className={`quote__text z-20 text-white text-center text-2xl sm:text-base underline decoration-solid decoration-from-font text-body font-regular ${
+            className={`quote__text z-20 text-white text-center text-xl sm:text-base italic text-body font-regular ${
               isFadingOut ? "quote__text--fadeout" : "quote__text"
             }`}
           >
