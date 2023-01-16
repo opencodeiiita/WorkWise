@@ -7,6 +7,7 @@ import axios from "axios";
 import Cards from "./components/Cards.js";
 import KanbanSection from "./components/KanbanSection.js";
 import Columns from "./components/ColumnsList.js";
+import Loader from "./components/loader.js";
 function App() {
   return (
     <>
@@ -49,6 +50,7 @@ function AnimatedRoutes() {
 						<Route path=":section" element={<KanbanSection />} />
 					</Route>
 					<Route path="/Cards" element={<Cards />}></Route>
+          <Route path="/loader" element={<Loader />}></Route>
 				</Routes>
 			</AnimatePresence>
 		</>

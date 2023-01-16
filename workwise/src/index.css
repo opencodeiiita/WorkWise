@@ -17,7 +17,24 @@ code {
     opacity: 100%;
 
 }
-
+.loader-spin
+{
+  animation:spin 1s infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(180deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+  
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
