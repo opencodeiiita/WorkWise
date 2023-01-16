@@ -219,7 +219,7 @@ export default function Homepage({ url }) {
                   </Button>
                 </Form.Item>
               </Form>
-              <div className="bookmarks">
+              {/* <div className="bookmarks">
                 {bookmarks.map((item, index) => (
                   <div key={index} className="flex place-items-center">
                     <h3 className="font-semibold text-lg mr-3">{item.image}</h3>
@@ -227,7 +227,7 @@ export default function Homepage({ url }) {
                     <button className="text-gray-50 bg-red-600 text-body text-sm rounded-xl px-1 ease-out duration-500 ml-3 font-semibold hover:text-red-600 hover:bg-gray-50 hover:scale-125" onClick={()=>delBookmark(index)}>Delete</button>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </Modal>
           </div>
       </div>
