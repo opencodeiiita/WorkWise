@@ -12,7 +12,6 @@ export default () => {
   function saved() {
     let tempObj = [];
     for (let i = 0; i < localStorage.length; i++) {
-      let keyno = i;
       if (`${localStorage.getItem(i)}` === params.section)
         tempObj.push(<SItem key={i} keyno={i} select />);
       else tempObj.push(<SItem key={i} keyno={i} />);
