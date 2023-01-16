@@ -158,3 +158,11 @@
     height: 50%;
   }
 }
+
+#settings-icon{
+  position: absolute;
+  left: 1rem;
+  height: 2rem;
+  width: 2rem;
+  bottom: 1rem;
+}
