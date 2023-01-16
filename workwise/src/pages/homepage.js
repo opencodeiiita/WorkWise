@@ -10,7 +10,7 @@ import Bookmark from "../components/Bookmark";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import {  Button, Modal, Form, Input  } from 'antd';
-
+import Loader from "../components/loader";
 import CalendarComponent from "../components/Calendar";
 
 export default function Homepage({ url }) {
@@ -96,10 +96,18 @@ export default function Homepage({ url }) {
     bookmarks.splice(ind,1)
     localStorage.setItem('bookmarks',JSON.stringify(bookmarks))
   }
-
+  setTimeout(() => {
+    
+    document.querySelector("#loader-div").style.opacity="0%";
+    setTimeout(()=>{
+    document.querySelector("#loader-div").style.display="none";
+    },1000);
+  }, 4000);
   return (
+    <>
+
     <motion.div
-      className=" image h-screen bg-no-repeat bg-cover absolute"
+      className="image h-screen bg-no-repeat bg-cover absolute"
       style={{ backgroundImage: `url(${url})` }}
       initial={{ x: -window.innerWidth }}
       animate={{ x: 0, transition: { type: "tween" } }}
@@ -109,7 +117,10 @@ export default function Homepage({ url }) {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       exit={{ x: -window.innerWidth, opacity: 0, transition: { delay: 0.25 } }}
+    
     >
+        <Loader/>
+
       <button
         className="absolute bottom-0 right-0 py-6 sm:py-2 px-6 sm:px-4  transition
         duration-150
@@ -119,9 +130,9 @@ export default function Homepage({ url }) {
           console.log(showModal);
         }}
       >
+        
         <BsFillCalendarDateFill color="white " className="calendar-icon" />
       </button>
-
       <Link to="/kanban">
         <div className="absolute right-8 top-[50%] h-16 w-16 rounded-full">
           <svg
@@ -232,5 +243,6 @@ export default function Homepage({ url }) {
           </div>
       </div>
     </motion.div>
+    </>
   );
 }
