@@ -9,10 +9,29 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import Bookmark from "../components/Bookmark";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import {  Button, Modal, Form, Input  } from 'antd';
 
 import CalendarComponent from "../components/Calendar";
 
 export default function Homepage({ url }) {
+  const [isModalOpen, setIsModalOpen2] = useState(false);
+  const showModal2 = () => {
+    setIsModalOpen2(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen2(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen2(false);
+  };
+
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
   const [showModal, setShowModal] = useState(false);
   let navigate = useNavigate();
 
@@ -69,6 +88,14 @@ export default function Homepage({ url }) {
 
     setTouchPosition(null);
   };
+
+  var marks = localStorage.getItem("bookmarks")
+  let bookmarks = JSON.parse(marks)
+
+  function delBookmark(ind){
+    bookmarks.splice(ind,1)
+    localStorage.setItem('bookmarks',JSON.stringify(bookmarks))
+  }
 
   return (
     <motion.div
@@ -135,6 +162,74 @@ export default function Homepage({ url }) {
           {/* Modal Render End  */}
         </div>
         <Quotes />
+          <div id="settings-icon">
+            <img src="/settings.png" alt="jin" onClick={showModal2} className="hover:scale-125 hover:duration-500"/>
+            <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Form
+                name="basic"
+                labelCol={{
+                  span: 8,
+                }}
+                wrapperCol={{
+                  span: 16,
+                }}
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                className="grid justify-items-center"
+              >
+
+                <Form.Item
+                  label="Username"
+                  name="username"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your username!',
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  label="Location"
+                  name="location"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your location!',
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                  }}
+                >
+                  <Button type="primary" htmlType="submit">
+                    Submit
+                  </Button>
+                </Form.Item>
+              </Form>
+              <div className="bookmarks">
+                {bookmarks.map((item, index) => (
+                  <div key={index} className="flex place-items-center">
+                    <h3 className="font-semibold text-lg mr-3">{item.image}</h3>
+                    <a href={item.url} className="text-body text-base font-normal text-blue-600">{item.url}</a>
+                    <button className="text-gray-50 bg-red-600 text-body text-sm rounded-xl px-1 ease-out duration-500 ml-3 font-semibold hover:text-red-600 hover:bg-gray-50 hover:scale-125" onClick={()=>delBookmark(index)}>Delete</button>
+                  </div>
+                ))}
+              </div>
+            </Modal>
+          </div>
       </div>
     </motion.div>
   );
