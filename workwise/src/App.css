@@ -77,9 +77,9 @@
   margin: 38vh 0 20px 0;
 }
 
-.quote__bg {
+/* .quote__bg {
   background: rgba(175, 175, 175, 0.85);
-}
+} */
 
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
   .quote__bg {
@@ -163,4 +163,20 @@
     width: 70%;
     height: 50%;
   }
+}
+
+#settings-icon{
+  position: absolute;
+  left: 1rem;
+  height: 2rem;
+  width: 2rem;
+  bottom: 1rem;
+}
+
+.ant-btn-primary {
+  background-color: blue !important;
+}
+
+.font-title{
+ font-family: 'Exo 2', sans-serif;
 }

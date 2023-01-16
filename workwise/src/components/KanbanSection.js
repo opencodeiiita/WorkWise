@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Cards from "./Cards";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";  
+import ColumnsList from "./ColumnsList";
 
 const KanbanSection = () => {
   const params = useParams();
@@ -71,6 +72,7 @@ const KanbanSection = () => {
     <>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className=" overflow-auto bg-gray-200 h-[100vh] w-[max(calc(100%-300px),67vw)] absolute right-0">
+        <ColumnsList />
           {params.section}
           <div className="flex flex-row flex-wrap characters">
             <div className="flex flex-row flex-wrap flex-1">
