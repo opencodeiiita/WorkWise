@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Cards from "./Cards";
 import { DragDropContext } from "react-beautiful-dnd";  
+import ColumnsList from "./ColumnsList";
 
 const KanbanSection = () => {
   const params = useParams();
@@ -68,32 +69,33 @@ const KanbanSection = () => {
   };
 
   return (
-    <>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className=" overflow-auto bg-gray-200 h-[100vh] w-[max(calc(100%-300px),67vw)] absolute right-0">
-          {params.section}
-          <div className="flex flex-row flex-wrap characters">
-            <div className="flex flex-row flex-wrap flex-1">
-              <div className="flex-1">
-                <Cards id={0} data={elements[0]} />
-              </div>
-              <div className="flex-1 ">
-                <Cards id={1} data={elements[1]} />
-              </div>
-            </div>
-            <div className="flex flex-row flex-wrap flex-1">
-              <div className="flex-1 ">
-                <Cards id={2} data={elements[2]} />
-              </div>
-              <div className="flex-1 ">
-                <Cards id={3} data={elements[3]} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </DragDropContext>
-    </>
-  );
+		<>
+			<DragDropContext onDragEnd={onDragEnd}>
+				<div className=" overflow-auto bg-gray-200 h-[100vh] w-[max(calc(100%-300px),67vw)] absolute right-0">
+					<ColumnsList />
+					{params.section}
+					<div className="flex flex-row flex-wrap characters">
+						<div className="flex flex-row flex-wrap flex-1">
+							<div className="flex-1">
+								<Cards id={0} data={elements[0]} />
+							</div>
+							<div className="flex-1 ">
+								<Cards id={1} data={elements[1]} />
+							</div>
+						</div>
+						<div className="flex flex-row flex-wrap flex-1">
+							<div className="flex-1 ">
+								<Cards id={2} data={elements[2]} />
+							</div>
+							<div className="flex-1 ">
+								<Cards id={3} data={elements[3]} />
+							</div>
+						</div>
+					</div>
+				</div>
+			</DragDropContext>
+		</>
+	);
 };
 
 let cards = [
