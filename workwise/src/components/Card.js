@@ -6,6 +6,15 @@ function Card(props) {
   const card = props.card;
   const dateFormat = "YYYY-MM-DD";
   const dateFormat2 = "MMM DD, YYYY";
+  const colors = [
+    "bg-amber-500",
+    "bg-orange-700",
+    "bg-red-500",
+    "bg-blue-500",
+    "bg-green-500",
+    "bg-violet-500",
+  ];
+  const randColorIndex = Math.floor(Math.random() * 5);
   return (
     <Draggable draggableId={card.id} index={props.index}>
       {(provided, snapshot) => {
@@ -18,47 +27,55 @@ function Card(props) {
             className="w-[88%] m-4 h-max bg-gray-50 rounded-lg overflow-hidden"
           >
             <div className="tags flex justify-start ml-4 mr-4 mt-4 mb-2 overflow-x-scroll">
-              {card?.tags.map((item, index) => {
-                if (item === "Research") {
-                  // return (
+              {props.card.tags.map((item, index) => {
+                return (
                   <span
                     key={index}
-                    class="inline-block bg-blue-500 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
+                    class={`inline-block ${colors[randColorIndex]} rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2`}
                   >
                     {item}
-                  </span>;
-                  // );
-                }
-                if (item === "Design") {
-                  // return (
-                  <span
-                    key={index}
-                    class="inline-block bg-violet-700 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
-                  >
-                    {item}
-                  </span>;
-                  // );
-                }
-                if (item === "Content") {
-                  // return (
-                  <span
-                    key={index}
-                    class="inline-block bg-amber-500 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
-                  >
-                    {item}
-                  </span>;
-                  // );
-                }
-                if (item === "Planning") {
-                  // return (
-                  <span
-                    key={index}
-                    class="inline-block bg-orange-700 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
-                  >
-                    {item}
-                  </span>;
-                  // );
-                }
+                  </span>
+                );
+                // if (item === "Research") {
+                //   return (
+                //     <span
+                //       key={index}
+                //       class="inline-block bg-blue-500 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
+                //     >
+                //       {item}
+                //     </span>
+                //   );
+                // }
+                // if (item === "Design") {
+                //   return (
+                //     <span
+                //       key={index}
+                //       class="inline-block bg-violet-700 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
+                //     >
+                //       {item}
+                //     </span>
+                //   );
+                // }
+                // if (item === "Content") {
+                //   return (
+                //     <span
+                //       key={index}
+                //       class="inline-block bg-amber-500 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
+                //     >
+                //       {item}
+                //     </span>
+                //   );
+                // }
+                // if (item === "Planning") {
+                //   return (
+                //     <span
+                //       key={index}
+                //       class="inline-block bg-orange-700 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
+                //     >
+                //       {item}
+                //     </span>
+                //   );
+                // }
               })}
             </div>
             {card?.imgUrl && (

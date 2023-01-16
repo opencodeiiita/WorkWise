@@ -3,10 +3,12 @@ export default (props) => {
   let textadd = (e) => {
     if (e.key === "Enter") {
       let txt = e.target.value;
-      e.target.previousSibling.classList.remove("hidden");
-      e.target.previousSibling.childNodes[1].innerHTML = txt;
-      e.target.className = "hidden";
-      localStorage.setItem(props.keyno, txt);
+      if (txt !== null || txt !== "") {
+        e.target.previousSibling.classList.remove("hidden");
+        e.target.previousSibling.childNodes[1].innerHTML = txt;
+        e.target.className = "hidden";
+        localStorage.setItem(props.keyno, txt);
+      }
     }
   };
   let select = (e) => {
@@ -31,8 +33,8 @@ export default (props) => {
           className={`cursor-pointer 
             opacity-100 w-0 `}
           name="projects"
-            onFocus={select}
-            onBlur={deselect}
+          onFocus={select}
+          onBlur={deselect}
         />
         <Link to={`${localStorage.getItem(props.keyno)}`}>
           <div
@@ -48,7 +50,7 @@ export default (props) => {
         type="text"
         autoFocus
         className={`${
-          localStorage.getItem(props.keyno) == null ? "" : "hidden"
+          localStorage.getItem(props.keyno) === null ? "" : "hidden"
         } bg-gray-100 border-b-[1px] border-black outline-none w-4/5 text-black p-1 pl-2`}
         onKeyDown={textadd}
       />
