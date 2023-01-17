@@ -69,56 +69,56 @@ const KanbanSection = () => {
   };
 
   return (
-    <>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className=" overflow-auto bg-gray-200 h-[100vh] w-[max(calc(100%-300px),67vw)] absolute right-0">
-        <ColumnsList />
-          {params.section}
-          <div className="flex flex-row flex-wrap characters">
-            <div className="flex flex-row flex-wrap flex-1">
-              <div className="flex-1">
-                <Cards
-                  id={0}
-                  data={elements[0]}
-                  setElements={setElements}
-                  fullData={elements}
-                  columnTitle={columnTitles[0]}
-                />
-              </div>
-              <div className="flex-1 ">
-                <Cards
-                  id={1}
-                  data={elements[1]}
-                  setElements={setElements}
-                  fullData={elements}
-                  columnTitle={columnTitles[1]}
-                />
-              </div>
-            </div>
-            <div className="flex flex-row flex-wrap flex-1">
-              <div className="flex-1 ">
-                <Cards
-                  id={2}
-                  data={elements[2]}
-                  setElements={setElements}
-                  fullData={elements}
-                  columnTitle={columnTitles[2]}
-                />
-              </div>
-              <div className="flex-1 ">
-                <Cards
-                  id={3}
-                  data={elements[3]}
-                  setElements={setElements}
-                  fullData={elements}
-                  columnTitle={columnTitles[3]}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </DragDropContext>
-    </>
-  );
+		<>
+			<DragDropContext onDragEnd={onDragEnd}>
+				<div className=" overflow-auto bg-[#F3F4F8] h-[100vh] w-[max(calc(100%-300px),67vw)] absolute right-0">
+					<ColumnsList />
+					<div className="title ml-4 mb-5 text-3xl font-semibold font-title">#{params.section}</div>
+					<div className="flex flex-row flex-wrap characters">
+						<div className="flex flex-row flex-wrap flex-1">
+							<div className="flex-1">
+								<Cards
+									id={0}
+									data={elements[0]}
+									setElements={setElements}
+									fullData={elements}
+									columnTitle={columnTitles[0]}
+								/>
+							</div>
+							<div className="flex-1 ">
+								<Cards
+									id={1}
+									data={elements[1]}
+									setElements={setElements}
+									fullData={elements}
+									columnTitle={columnTitles[1]}
+								/>
+							</div>
+						</div>
+						<div className="flex flex-row flex-wrap flex-1">
+							<div className="flex-1 ">
+								<Cards
+									id={2}
+									data={elements[2]}
+									setElements={setElements}
+									fullData={elements}
+									columnTitle={columnTitles[2]}
+								/>
+							</div>
+							<div className="flex-1 ">
+								<Cards
+									id={3}
+									data={elements[3]}
+									setElements={setElements}
+									fullData={elements}
+									columnTitle={columnTitles[3]}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</DragDropContext>
+		</>
+	);
 };
 export default KanbanSection;

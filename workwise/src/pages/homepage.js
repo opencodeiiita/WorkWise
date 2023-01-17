@@ -99,6 +99,8 @@ export default function Homepage({ url }) {
   setTimeout(() => {
     
     document.querySelector("#loader-div").style.opacity="0%";
+    let x = document.querySelector(".App");
+    x.classList.replace("opacity-0", "opacity-100");
     setTimeout(()=>{
     document.querySelector("#loader-div").style.display="none";
     },1000);
@@ -146,7 +148,7 @@ export default function Homepage({ url }) {
           </svg>
         </div>
       </Link>
-      <div className="App">
+      <div className="App opacity-0">
         <div className="msg  text-bold text-white">
           <Time />
           <Date />

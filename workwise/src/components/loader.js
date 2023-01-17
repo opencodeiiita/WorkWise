@@ -1,7 +1,7 @@
 export default ()=>{
     return (
         <div
-        className="h-screen flex justify-center items-center opacity-100 bg-white transition-all"
+        className="h-screen flex justify-center items-center opacity-100 bg-white transition-all "
         id="loader-div"
         >
             <svg

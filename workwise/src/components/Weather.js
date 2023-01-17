@@ -18,7 +18,7 @@ const Weather = ({ cityName, apiKey }) => {
     <>
       {weatherData !== "" && (
         <>
-          <div className="text-lg w-36 sm:w-28 absolute right-2 top-2 drop-shadow-[0_0_10px_black] sm:right-0 sm:top-0">
+          <div className="text-lg w-36 sm:w-28 absolute right-2 top-2 drop-shadow-[0_0_10px_black] sm:right-0 sm:top-0 -z-0">
             <img
               alt="weather"
               src={`icons/weather/${weatherData.weather[0].icon}.png`}

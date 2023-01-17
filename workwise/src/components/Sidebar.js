@@ -11,7 +11,7 @@ export default () => {
 
   function saved() {
     let tempObj = [];
-    for (let i = 0; i < localStorage.length; i++) {
+    for (let i = 0; i < localStorage.length/2; i++) {
       if (`${localStorage.getItem(i)}` === params.section)
         tempObj.push(<SItem key={i} keyno={i} select />);
       else tempObj.push(<SItem key={i} keyno={i} />);
@@ -23,6 +23,7 @@ export default () => {
     let n = items.length;
     setItems(items.concat(<SItem key={n} keyno={n} />));
   };
+
   let Slide = (e) => {
     let x = document.querySelector(".sidebar");
     let child = x.childNodes;
@@ -34,6 +35,7 @@ export default () => {
     x.classList.replace("w-[min(300px,33vw)]", "w-14");
     child[2].classList.remove("hidden");
   };
+
   let openUp = (e) => {
     e.target.parentElement.previousSibling.classList.replace(
       "opacity-50",
@@ -50,6 +52,7 @@ export default () => {
     x.classList.replace("w-14", "w-[min(300px,33vw)]");
     child[2].classList.add("hidden");
   };
+
   let themechange = (e) => {
     let x = document.querySelector(".themeslider");
     if (dark) {
@@ -69,6 +72,7 @@ export default () => {
     }
     setDark(!dark);
   };
+
   return (
 		<div
 			className="sidebar h-[100vh] w-[min(300px,33vw)] transition-all text-[min(4vw,30px)]
@@ -108,8 +112,7 @@ export default () => {
 
 			<div
 				className="projects
-        w-4/5 ml-auto mr-auto mt-12 p-3
-        "
+        w-4/5 ml-auto mr-auto mt-12 p-3"
 			>
 				<div className="font-bold mb-3 text-[.6em]">Projects</div>
 				{items}

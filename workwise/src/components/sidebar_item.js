@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 export default (props) => {
+   const [counter, setCounter] = useState(0);
   let textadd = (e) => {
     if (e.key === "Enter") {
       let txt = e.target.value;
@@ -8,6 +10,7 @@ export default (props) => {
         e.target.previousSibling.childNodes[1].innerHTML = txt;
         e.target.className = "hidden";
         localStorage.setItem(props.keyno, txt);
+        setCounter(counter+1);
       }
     }
   };
