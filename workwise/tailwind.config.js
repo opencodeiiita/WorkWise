@@ -19,6 +19,9 @@ module.exports = {
 			sm: { max: "639px" },
 			// => @media (max-width: 639px) { ... }
 		},
+	fontFamily: {
+		'body': ['DM Sans', 'sans-serif']
+	}
   },
   plugins: [],
 }
