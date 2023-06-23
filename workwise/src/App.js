@@ -2,17 +2,17 @@ import Homepage from "./pages/homepage.js";
 import Kanban from "./pages/kanban.js";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Cards from "./components/Cards.js";
 import KanbanSection from "./components/KanbanSection.js";
 import Columns from "./components/ColumnsList.js";
 import Loader from "./components/loader.js";
 import Login from "./pages/login.js";
+import {UserContext} from "./utils/contexts/User.js";
+import { useNavigate } from "react-router-dom";
+
 function App() {
-
-
-  
   return (
     <>
       <BrowserRouter>
@@ -23,6 +23,7 @@ function App() {
 }
 
 function AnimatedRoutes() {
+
   const location = useLocation();
   const [rendered, setRendered] = useState(false);
 
@@ -45,10 +46,11 @@ function AnimatedRoutes() {
   useEffect(() => {
     fetchBg();
   }, []);
+  
   return (
 		<>
 			<AnimatePresence>
-				<Routes location={location} key={location.pathname}>
+          <Routes location={location} key={location.pathname}>
 					<Route path="/" element={<Homepage url={url} />}></Route>
 					<Route path="/kanban" element={<Kanban />}>
 						<Route path=":section" element={<KanbanSection />} />

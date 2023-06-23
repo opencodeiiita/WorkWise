@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 import Time from "../components/Time";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import Date from "../components/Date";
 import Weather from "../components/Weather";
 import Quotes from "../components/Quotes";
@@ -12,8 +12,40 @@ import { Link, useNavigate } from "react-router-dom";
 import {  Button, Modal, Form, Input  } from 'antd';
 import Loader from "../components/loader";
 import CalendarComponent from "../components/Calendar";
+import { UserContext } from "../utils/contexts/User.js";
+import axios from "axios";
+import { Alert } from "antd";
+
 
 export default function Homepage({ url }) {
+
+  const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const getUser = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3001/api/v1/auth/success",
+        { withCredentials: true}
+      );
+      console.log(response);
+      if (response.status === 200) {
+        console.log(response);
+        setIsLoggedIn(true);
+        setUser(response.data);
+      } else if (response.status === 401) {
+        <Alert message="Error" type="error" showIcon />;
+        setIsLoggedIn(false);
+      }
+    } catch (err) {
+      setIsLoggedIn(false);
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   const [isModalOpen, setIsModalOpen2] = useState(false);
   const showModal2 = () => {
     setIsModalOpen2(true);
@@ -33,7 +65,6 @@ export default function Homepage({ url }) {
   };
 
   const [showModal, setShowModal] = useState(false);
-  let navigate = useNavigate();
 
   const [touchPosition, setTouchPosition] = useState(null);
 
