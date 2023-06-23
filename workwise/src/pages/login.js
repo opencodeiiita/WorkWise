@@ -9,7 +9,7 @@ import GoogleButton from 'react-google-button'
 export default function Login() {
  
   const redirectToGoogleSSO = () => {
-    const url = "http://localhost:3000/api/v1/auth/login/google";
+    const url = "http://localhost:3001/api/v1/auth/login/google";
     const newWindow = window.open(
       url,
       "_blank",
