@@ -8,7 +8,11 @@ import Cards from "./components/Cards.js";
 import KanbanSection from "./components/KanbanSection.js";
 import Columns from "./components/ColumnsList.js";
 import Loader from "./components/loader.js";
+import Login from "./pages/login.js";
 function App() {
+
+
+  
   return (
     <>
       <BrowserRouter>
@@ -51,6 +55,8 @@ function AnimatedRoutes() {
 					</Route>
 					<Route path="/Cards" element={<Cards />}></Route>
           <Route path="/loader" element={<Loader />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/login/error" >Error logging in</Route>
 				</Routes>
 			</AnimatePresence>
 		</>
