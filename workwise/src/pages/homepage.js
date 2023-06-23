@@ -19,32 +19,7 @@ import { Alert } from "antd";
 
 export default function Homepage({ url }) {
 
-  const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const getUser = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3001/api/v1/auth/success",
-        { withCredentials: true}
-      );
-      console.log(response);
-      if (response.status === 200) {
-        console.log(response);
-        setIsLoggedIn(true);
-        setUser(response.data);
-      } else if (response.status === 401) {
-        <Alert message="Error" type="error" showIcon />;
-        setIsLoggedIn(false);
-      }
-    } catch (err) {
-      setIsLoggedIn(false);
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   const [isModalOpen, setIsModalOpen2] = useState(false);
   const showModal2 = () => {
@@ -127,8 +102,8 @@ export default function Homepage({ url }) {
     bookmarks.splice(ind,1)
     localStorage.setItem('bookmarks',JSON.stringify(bookmarks))
   }
+  
   setTimeout(() => {
-    
     document.querySelector("#loader-div").style.opacity="0%";
     let x = document.querySelector(".App");
     x.classList.replace("opacity-0", "opacity-100");
@@ -136,6 +111,7 @@ export default function Homepage({ url }) {
     document.querySelector("#loader-div").style.display="none";
     },1000);
   }, 4000);
+
   return (
     <>
 

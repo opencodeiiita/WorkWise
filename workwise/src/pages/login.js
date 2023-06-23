@@ -9,7 +9,6 @@ import { useContext } from "react";
 import { Alert } from "antd";
 
 export default function Login() {
-  const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const redirectToGoogleSSO = () => {
