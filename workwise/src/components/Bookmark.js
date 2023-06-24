@@ -3,80 +3,109 @@ import BookmarkIcon from "../icons/BookMarkIcon.svg";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Modal, Input } from "antd";
+import { IconContext } from "react-icons";
 
 const Bookmark = () => {
   const [show, setShow] = useState(false);
-  const [icons, setIcons] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
   const [addUrl, setAddUrl] = useState("");
+  const [addName, setName] = useState("");
 
-  //states for modal
+  // States for modal
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const fetchBookmarks = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3001/api/v1/bookmarks",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          },
+        }
+      );
+      setBookmarks(response.data.bookmarks);
+    } catch (error) {
+      console.error("Error fetching bookmarks:", error);
+    }
+  };
+
+  const createBookmark = async (url, name, imageUrl) => {
+    try {
+      const data = {
+        url: url,
+        name: name,
+        imageUrl: imageUrl
+      };
+  
+      const response = await axios.post(
+        "http://localhost:3001/api/v1/bookmarks",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          },
+        }
+      );
+  
+      setBookmarks([...bookmarks, response.data]);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error creating bookmark:", error);
+    }
+  };
+  
+
   const showModal = () => {
     setOpen(true);
   };
+
+  const handleCancel = () => {
+    setAddUrl("");
+    setName("");
+    setOpen(false);
+  };
+  
   const handleOk = async () => {
     setConfirmLoading(true);
-    //To remove https:// from the input
     const tempUrl = addUrl.replace(/^https?:\/\//, "");
-    //sending is updated url
-    await axios
-      .get(`http://favicongrabber.com/api/grab/${tempUrl}`)
-      .then((res) => {
-        //Storing a local item with the key named bookmarks
-        //converting the json file into string as localStorage only stores string.
-        localStorage.setItem(
-          "bookmarks",
-          JSON.stringify([
-            ...icons,
-            { image: res.data.icons[1].src, url: res.data.domain },
-          ])
-        );
-        //updating state to hold the new bookmark icon
-        setIcons([
-          ...icons,
-          { image: res.data.icons[1].src, url: res.data.domain },
-        ]);
-      })
-      .catch((err) => {
-        //taking first character to input to store as text
-        const firstChar = tempUrl[0].toUpperCase();
-        localStorage.setItem(
-          "bookmarks",
-          JSON.stringify([...icons, { image: firstChar, url: tempUrl }])
-        );
-        setIcons([...icons, { image: firstChar, url: tempUrl }]);
-      });
-    //resetting url input
+    console.log(tempUrl);
+    const imageUrl = `https://www.google.com/s2/favicons?domain=${tempUrl}&sz=128`;
+    console.log(imageUrl)
+  
+    try {
+      await createBookmark(tempUrl, addName, imageUrl); 
+    } catch (error) {
+      console.error("Error creating bookmark:", error);
+    }
+  
     setAddUrl("");
-    //doing this so that the the transition from bookmark adding and modal closing is smooth
+    setName(""); // Clear addName state
     setTimeout(() => {
       setOpen(false);
       setConfirmLoading(false);
     }, 300);
   };
-  const handleCancel = () => {
-    //to clear input and close modal
-    setAddUrl("");
-    setOpen(false);
-  };
+  
 
   const showDrawer = () => setShow(!show);
 
   const addIcon = () => showModal();
-  //to rerender app when icons is updated
-  useEffect(() => {}, [icons]);
-  //to get data from local page when the page first renders.
-  //also need to parse the string as we need data in json.
+
   useEffect(() => {
-    const tempJSON = JSON.parse(localStorage.getItem("bookmarks"));
-    if (tempJSON) setIcons(tempJSON);
+    fetchBookmarks();
   }, []);
+
+ 
+
   return (
     <>
       <Modal
         title=""
-        open={open}
+        visible={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
@@ -88,6 +117,12 @@ const Bookmark = () => {
           placeholder="Enter A URL"
           value={addUrl}
           onChange={(e) => setAddUrl(e.target.value)}
+        />
+        <Input
+          className="mt-8 bg-[#D9D9D94C] text-white"
+          placeholder="Enter name"
+          value={addName}
+          onChange={(e) => setName(e.target.value)}
         />
       </Modal>
       <div className="absolute h-12 pt-1  left-4 top-1 rounded-lg">
@@ -108,29 +143,26 @@ const Bookmark = () => {
             className="h-10 w-10 hover:drop-shadow-[0_0_3px_black] "
             onClick={showDrawer}
           />
-          {icons.map((icon, index) => {
-            return (
-              <a
-                key={index}
-                className={`${
-                  icon.image.length === 1
-                    ? "text-[22px] bg-[#FFFFFF4C] rounded-full h-10 w-10 pt-[2px] mx-1 font-bold"
-                    : "text-[0px]"
-                } rounded-full px-1`}
-                target="_blank"
-                href={`http://${icon.url}`}
-              >
-                {icon.image.length === 1 ? (
-                  icon.image
-                ) : (
-                  <img
-                    src={icon.image}
-                    className=" bg-[#FFFFFF8C] pt-1 rounded-full h-10 w-10 pb-1 px-1 hover:drop-shadow-[0_0_3px_black]"
-                  />
-                )}
-              </a>
-            );
-          })}
+         {bookmarks &&
+  bookmarks.length !== 0 &&
+  bookmarks.map((bookmark, index) => {
+    return (
+      <a
+        key={index}
+        className="text-[22px] bg-[#FFFFFF4C] rounded-full h-10 w-10 pt-[2px] mx-1 font-bold rounded-full px-1"
+        target="_blank"
+        href={bookmark.url}
+      >
+        {bookmark.imageUrl && (
+          <img
+            src={bookmark.imageUrl}
+            alt="Bookmark Icon"
+            className="bookmark-icon"
+          />
+        )}
+      </a>
+    );
+  })}
           <svg
             onClick={addIcon}
             className="h-12 w-12 relative -top-1 fill-[#FFFFFF8C] hover:drop-shadow-[0_0_3px_black]"
@@ -144,12 +176,6 @@ const Bookmark = () => {
               </g>
             </g>
           </svg>
-          {/* <PlusOutlined
-            height="22px"
-            width="22px"
-            onClick={addIcon}
-            className={`h-6 w-6 mx-1 relative -top-2 inline-block rounded-full bg-[#D9D9D94C] hover:drop-shadow-[0_0_3px_grey]`}
-          /> */}
         </div>
       </div>
     </>

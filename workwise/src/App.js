@@ -53,7 +53,9 @@ function AnimatedRoutes() {
 			);
 			if (response.status === 200) {
 				setIsLoggedIn(true);
-				setUser(response.data);
+				console.log(response.data);
+				setUser(response.data.user);
+				localStorage.setItem("jwt_token", response.data.token);
 			} else if (response.status === 401) {
 				// Handle unauthorized access
 				<Alert message="Error" type="error" showIcon />;
@@ -66,7 +68,7 @@ function AnimatedRoutes() {
 	};
 
 	useEffect(() => {
-		fetchBg();
+		// fetchBg();
 		getUser();
 	}, []);
 
