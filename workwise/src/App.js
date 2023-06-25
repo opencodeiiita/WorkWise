@@ -15,7 +15,15 @@ import { Alert } from "antd";
 import LandingPage from "./pages/landing.js";
 import TodoApp from "./components/TodoList.js";
 
+
 function App() {
+	const { setBaseUrl } = useContext(UserContext);
+	if (process.env.REACT_APP_PRODUCTION === "true") {
+		setBaseUrl(process.env.REACT_APP_PRODUCTION_URL);
+	} else {
+		setBaseUrl(process.env.REACT_APP_DEVELOPMENT_URL);
+	}
+
 	return (
 		<>
 			<BrowserRouter>
@@ -26,7 +34,7 @@ function App() {
 }
 
 function AnimatedRoutes() {
-	const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(UserContext);
+	const { isLoggedIn, setIsLoggedIn, user, setUser, baseUrl } = useContext(UserContext);
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true);
 	const location = useLocation();
@@ -49,12 +57,12 @@ function AnimatedRoutes() {
 	const getUser = async () => {
 		try {
 			const response = await axios.get(
-				"http://localhost:3001/api/v1/auth/success",
+				`${baseUrl}/auth/success`,
 				{ withCredentials: true }
 			);
+			
 			if (response.status === 200) {
 				setIsLoggedIn(true);
-				console.log(response.data);
 				setUser(response.data.user);
 				localStorage.setItem("jwt_token", response.data.token);
 			} else if (response.status === 401) {

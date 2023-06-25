@@ -8,6 +8,7 @@ const TodoApp = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [tasks, setTasks] = useState([]);
   const [newTaskContent, setNewTaskContent] = useState("");
+  const { baseUrl } = useContext(UserContext);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -23,18 +24,14 @@ const TodoApp = () => {
   useEffect(() => {
     const fetchAllTasks = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3001/api/v1/todoList",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-            },
-          }
-        );
+        const response = await axios.get(`${baseUrl}/todoList`, {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+					},
+				});
 
         setTasks(response.data.toDoList.tasks);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
@@ -47,21 +44,20 @@ const TodoApp = () => {
   const handleCreateTask = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/v1/todoList",
-        {
-          content: newTaskContent,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-          },
-        }
-      );
+				`${baseUrl}/todoList`,
+				{
+					content: newTaskContent,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+					},
+				}
+			);
 
       const updatedToDoList = response.data.toDoList;
       setTasks(updatedToDoList.tasks);
-      console.log(updatedToDoList.tasks);
       setNewTaskContent("");
     } catch (error) {
       console.error("Error creating task:", error);
@@ -73,18 +69,18 @@ const TodoApp = () => {
   const handleTaskStatusUpdate = async (taskId, status) => {
     try {
       await axios.put(
-        `http://localhost:3001/api/v1/todoList`,
-        {
-          status: status,
-          taskId: taskId,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-          },
-        }
-      );
+				`${baseUrl}/todoList`,
+				{
+					status: status,
+					taskId: taskId,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+					},
+				}
+			);
 
       const updatedTasks = tasks.map((task) => {
         if (task._id === taskId) {
@@ -106,7 +102,7 @@ const TodoApp = () => {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:3001/api/v1/todoList/${taskId}`, {
+      await axios.delete(`${baseUrl}/todoList/${taskId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,

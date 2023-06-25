@@ -19,6 +19,7 @@ import TodoList from "../components/TodoList";
 
 export default function Homepage({ url }) {
   const navigate = useNavigate();
+  const { user, focus } = useContext(UserContext);
 
   const [isModalOpen, setIsModalOpen2] = useState(false);
   const [showTodoList, setShowTodoList] = useState(false);
@@ -118,139 +119,155 @@ export default function Homepage({ url }) {
   }, 4000);
 
   return (
-    <>
-      <motion.div
-        className="image h-screen bg-no-repeat bg-cover absolute"
-        style={{ backgroundImage: `url(${url})` }}
-        initial={{ x: -window.innerWidth }}
-        animate={{ x: 0, transition: { type: "tween" } }}
-        // transition={{ type: "tween" }}
-        // onTouchStart={handleTouchStart}
-        // onTouchMove={handleTouchMove}
-        // onMouseDown={handleMouseDown}
-        // onMouseMove={handleMouseMove}
-        exit={{
-          x: -window.innerWidth,
-          opacity: 0,
-          transition: { delay: 0.25 },
-        }}
-      >
-        <Loader />
+		<>
+			<motion.div
+				className="image h-screen bg-no-repeat bg-cover absolute"
+				style={{ backgroundImage: `url(${url})` }}
+				initial={{ x: -window.innerWidth }}
+				animate={{ x: 0, transition: { type: "tween" } }}
+				// transition={{ type: "tween" }}
+				// onTouchStart={handleTouchStart}
+				// onTouchMove={handleTouchMove}
+				// onMouseDown={handleMouseDown}
+				// onMouseMove={handleMouseMove}
+				exit={{
+					x: -window.innerWidth,
+					opacity: 0,
+					transition: { delay: 0.25 },
+				}}
+			>
+				<Loader />
 
-        <button
-        className="absolute bottom-0 right-0 py-6 sm:py-2 px-6 sm:px-4 transition duration-150 ease-in-out"
-        onClick={handleTodoListToggle}
-      >
-        <FaClipboardList color="white" className="inline-block mr-2" size={32} />
-      </button>
-      {showTodoList && <TodoList className="todo-list" />}
+				{showTodoList && <TodoList className="todo-list" />}
 
+				<Link to="/kanban">
+					<div className="absolute right-8 top-[50%] h-16 w-16 rounded-full">
+						<svg
+							width={"100%"}
+							height={"100%"}
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="white"
+						>
+							<path d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z" />
+						</svg>
+					</div>
+				</Link>
+				<div className="App opacity-0">
+					<div className="msg  text-bold text-white">
+						<Time />
 
-        <Link to="/kanban">
-          <div className="absolute right-8 top-[50%] h-16 w-16 rounded-full">
-            <svg
-              width={"100%"}
-              height={"100%"}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="white"
-            >
-              <path d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z" />
-            </svg>
-          </div>
-        </Link>
-        <div className="App opacity-0">
-          <div className="msg  text-bold text-white">
-            <Time />
-            <Date />
-            <Weather
-              cityName={"mumbai"} //This is a temporary name we can have different city names.
-              apiKey={"a045d78dfc153d0c97dd1e87653d1ced"} //fill the api key here to make the widget work.
-            />
-            <Bookmark />
-            {/* Modal Render  */}
-            {showModal ? (
-              <>
-                <div
-                  className="calendar-position"
-                  onClick={() => {
-                    setShowModal(true);
-                  }}
-                >
-                  <div className="calendar">
-                    <CalendarComponent />
-                  </div>
-                </div>
-              </>
-            ) : null}
-            {/* Modal Render End  */}
-          </div>
-          <Quotes />
-          <div id="settings-icon">
-            <img
-              src="/settings.png"
-              alt="jin"
-              onClick={showModal2}
-              className="hover:scale-125 hover:duration-500"
-            />
-            <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-              <Form
-                name="basic"
-                labelCol={{
-                  span: 8,
-                }}
-                wrapperCol={{
-                  span: 16,
-                }}
-                initialValues={{
-                  remember: true,
-                }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-                className="grid justify-items-center"
-              >
-                <Form.Item
-                  label="Username"
-                  name="username"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your username!",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
+						{focus ? (
+							<></>
+						) : (
+							<>
+								<Date />
+								<Weather
+									cityName={"mumbai"} //This is a temporary name we can have different city names.
+									apiKey={"a045d78dfc153d0c97dd1e87653d1ced"} //fill the api key here to make the widget work.
+								/>
+								<Bookmark />
+								<button
+									className="absolute bottom-0 right-0 py-6 sm:py-2 px-6 sm:px-4 transition duration-150 ease-in-out"
+									onClick={handleTodoListToggle}
+								>
+									<FaClipboardList
+										color="white"
+										className="inline-block mr-2"
+										size={32}
+									/>
+								</button>
+								<div id="settings-icon">
+									<img
+										src="/settings.png"
+										alt="jin"
+										onClick={showModal2}
+										className="hover:scale-125 hover:duration-500"
+									/>
+									<Modal
+										open={isModalOpen}
+										onOk={handleOk}
+										onCancel={handleCancel}
+									>
+										<Form
+											name="basic"
+											labelCol={{
+												span: 8,
+											}}
+											wrapperCol={{
+												span: 16,
+											}}
+											initialValues={{
+												remember: true,
+											}}
+											onFinish={onFinish}
+											onFinishFailed={onFinishFailed}
+											autoComplete="off"
+											className="grid justify-items-center"
+										>
+											<Form.Item
+												label="Username"
+												name="username"
+												rules={[
+													{
+														required: true,
+														message: "Please input your username!",
+													},
+												]}
+											>
+												<Input />
+											</Form.Item>
 
-                <Form.Item
-                  label="Location"
-                  name="location"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your location!",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
+											<Form.Item
+												label="Location"
+												name="location"
+												rules={[
+													{
+														required: true,
+														message: "Please input your location!",
+													},
+												]}
+											>
+												<Input />
+											</Form.Item>
 
-                <Form.Item
-                  wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                  }}
-                >
-                  <Button type="primary" htmlType="submit">
-                    Submit
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Modal>
-          </div>
-        </div>
-      </motion.div>
-    </>
-  );
+											<Form.Item
+												wrapperCol={{
+													offset: 8,
+													span: 16,
+												}}
+											>
+												<Button type="primary" htmlType="submit">
+													Submit
+												</Button>
+											</Form.Item>
+										</Form>
+									</Modal>
+								</div>
+							</>
+						)}
+
+						{/* Modal Render  */}
+						{showModal ? (
+							<>
+								<div
+									className="calendar-position"
+									onClick={() => {
+										setShowModal(true);
+									}}
+								>
+									<div className="calendar">
+										<CalendarComponent />
+									</div>
+								</div>
+							</>
+						) : null}
+						{/* Modal Render End  */}
+					</div>
+
+					<Quotes />
+				</div>
+			</motion.div>
+		</>
+	);
 }

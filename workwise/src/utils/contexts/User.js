@@ -5,6 +5,11 @@ export const UserContext = createContext();
 export default function UserContextProvider({ children }) {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [focus, setFocus] = useState(
+		localStorage.getItem("timer") === null ? false : true
+	);
+  const [baseUrl, setBaseUrl] = useState("http://localhost:3001/api/v1");
+
   return (
     <UserContext.Provider
       value={{
@@ -12,6 +17,10 @@ export default function UserContextProvider({ children }) {
         setUser,
         isLoggedIn,
         setIsLoggedIn,
+        focus,
+        setFocus,
+        baseUrl,
+        setBaseUrl,
       }}
     >
       {children}

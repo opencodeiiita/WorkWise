@@ -10,9 +10,10 @@ import { Alert } from "antd";
 
 export default function Login() {
   const navigate = useNavigate();
+  const {baseUrl} = useContext(UserContext);
 
   const redirectToGoogleSSO = () => {
-    const url = "http://localhost:3001/api/v1/auth/login/google";
+    const url = `${baseUrl}/auth/login/google`;
     const newWindow = window.open(
       url,
       "_self"

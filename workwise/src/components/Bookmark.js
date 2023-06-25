@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import BookmarkIcon from "../icons/BookMarkIcon.svg";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import { Modal, Input } from "antd";
+import { UserContext } from "../utils/contexts/User.js";
 import { IconContext } from "react-icons";
 
 const Bookmark = () => {
   const [show, setShow] = useState(false);
+  const { baseUrl } = useContext(UserContext);
   const [bookmarks, setBookmarks] = useState([]);
   const [addUrl, setAddUrl] = useState("");
   const [addName, setName] = useState("");
@@ -17,15 +19,12 @@ const Bookmark = () => {
 
   const fetchBookmarks = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3001/api/v1/bookmarks",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-          },
-        }
-      );
+      const response = await axios.get(`${baseUrl}/bookmarks`, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+				},
+			});
       setBookmarks(response.data.bookmarks);
     } catch (error) {
       console.error("Error fetching bookmarks:", error);
@@ -41,18 +40,17 @@ const Bookmark = () => {
       };
   
       const response = await axios.post(
-        "http://localhost:3001/api/v1/bookmarks",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-          },
-        }
-      );
+				`${baseUrl}/bookmarks`,
+				data,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+					},
+				}
+			);
   
       setBookmarks([...bookmarks, response.data]);
-      console.log(response.data);
     } catch (error) {
       console.error("Error creating bookmark:", error);
     }
@@ -72,9 +70,7 @@ const Bookmark = () => {
   const handleOk = async () => {
     setConfirmLoading(true);
     const tempUrl = addUrl.replace(/^https?:\/\//, "");
-    console.log(tempUrl);
     const imageUrl = `https://www.google.com/s2/favicons?domain=${tempUrl}&sz=128`;
-    console.log(imageUrl)
   
     try {
       await createBookmark(tempUrl, addName, imageUrl); 
