@@ -13,6 +13,7 @@ import { UserContext } from "./utils/contexts/User.js";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "antd";
 import LandingPage from "./pages/landing.js";
+import TodoApp from "./components/TodoList.js";
 
 function App() {
 	return (
@@ -102,6 +103,7 @@ function AnimatedRoutes() {
 					{isLoggedIn ? (
 						<>
 							<Route path="/home" element={<Homepage url={url} />} />
+							<Route path="/todo" element={<TodoApp/>} />
 							<Route path="/kanban" element={<Kanban />}>
 								<Route path=":section" element={<KanbanSection />} />
 							</Route>
