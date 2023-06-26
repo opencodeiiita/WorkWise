@@ -4,16 +4,17 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import Cards from "./components/Cards.js";
 import KanbanSection from "./components/KanbanSection.js";
-import Columns from "./components/ColumnsList.js";
-import Loader from "./components/loader.js";
 import Login from "./pages/login.js";
 import { UserContext } from "./utils/contexts/User.js";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "antd";
 import LandingPage from "./pages/landing.js";
-import TodoApp from "./components/TodoList.js";
+import DefaultLayout from "./components/Dashboard/DefaultLayout.js";
+import Profile from "./components/Dashboard/Pages/Profile.js";
+import Pomodoro from "./components/Dashboard/Pages/Pomodoro.js";
+import Bookmarks from "./components/Dashboard/Pages/Bookmarks.js";
+import Projects from "./components/Dashboard/Pages/Projects.js";
 
 
 function App() {
@@ -108,10 +109,16 @@ function AnimatedRoutes() {
 			<AnimatePresence>
 				<Routes location={location} key={location.pathname}>
 					<Route path="/" element={<Login />} />
+					<Route path="/landing" element={<LandingPage />} />
 					{isLoggedIn ? (
 						<>
 							<Route path="/home" element={<Homepage url={url} />} />
-							<Route path="/todo" element={<TodoApp/>} />
+							<Route element={<DefaultLayout />}>
+								<Route path="/settings/profile" element={<Profile />} />
+								<Route path="/settings/pomodoro" element={<Pomodoro />} />
+								<Route path="/settings/bookmarks" element={<Bookmarks />} />
+								<Route path="/settings/projects" element={<Projects />} />
+							</Route>
 							<Route path="/kanban" element={<Kanban />}>
 								<Route path=":section" element={<KanbanSection />} />
 							</Route>

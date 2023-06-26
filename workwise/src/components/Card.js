@@ -24,7 +24,7 @@ function Card(props) {
             snapshot={snapshot}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            className="w-[88%] m-4 h-max bg-gray-50 rounded-lg overflow-hidden"
+            className="w-[88%] m-4 h-max bg-[#FFFFFF] rounded-lg overflow-hidden"
           >
             <div className="tags flex justify-start ml-4 mr-4 mt-4 mb-2 overflow-x-scroll">
               {props.card.tags.map((item, index) => {
