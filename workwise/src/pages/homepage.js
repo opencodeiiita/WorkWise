@@ -177,73 +177,16 @@ export default function Homepage({ url }) {
 										size={32}
 									/>
 								</button>
-								<div id="settings-icon">
-									<img
-										src="/settings.png"
-										alt="jin"
-										onClick={showModal2}
-										className="hover:scale-125 hover:duration-500"
-									/>
-									<Modal
-										open={isModalOpen}
-										onOk={handleOk}
-										onCancel={handleCancel}
-									>
-										<Form
-											name="basic"
-											labelCol={{
-												span: 8,
-											}}
-											wrapperCol={{
-												span: 16,
-											}}
-											initialValues={{
-												remember: true,
-											}}
-											onFinish={onFinish}
-											onFinishFailed={onFinishFailed}
-											autoComplete="off"
-											className="grid justify-items-center"
-										>
-											<Form.Item
-												label="Username"
-												name="username"
-												rules={[
-													{
-														required: true,
-														message: "Please input your username!",
-													},
-												]}
-											>
-												<Input />
-											</Form.Item>
-
-											<Form.Item
-												label="Location"
-												name="location"
-												rules={[
-													{
-														required: true,
-														message: "Please input your location!",
-													},
-												]}
-											>
-												<Input />
-											</Form.Item>
-
-											<Form.Item
-												wrapperCol={{
-													offset: 8,
-													span: 16,
-												}}
-											>
-												<Button type="primary" htmlType="submit">
-													Submit
-												</Button>
-											</Form.Item>
-										</Form>
-									</Modal>
-								</div>
+								<Link to="/settings/profile">
+									<div id="settings-icon">
+										<img
+											src="/settings.png"
+											alt="jin"
+											onClick={showModal2}
+											className="hover:scale-125 hover:duration-500"
+										/>
+									</div>
+								</Link>
 							</>
 						)}
 
