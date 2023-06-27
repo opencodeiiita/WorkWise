@@ -66,6 +66,7 @@ function AnimatedRoutes() {
 				setIsLoggedIn(true);
 				setUser(response.data.user);
 				localStorage.setItem("jwt_token", response.data.token);
+				localStorage.setItem("user", JSON.stringify(response.data.user));
 			} else if (response.status === 401) {
 				// Handle unauthorized access
 				<Alert message="Error" type="error" showIcon />;

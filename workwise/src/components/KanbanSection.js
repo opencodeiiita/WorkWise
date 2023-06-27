@@ -3,30 +3,92 @@ import { useParams } from "react-router-dom";
 import Cards from "./Cards";
 import { DragDropContext } from "react-beautiful-dnd";  
 import ColumnsList from "./ColumnsList";
+import axios from "axios";
 
 const KanbanSection = () => {
   const params = useParams();
-
   let cardsData = [[], [], [], []];
   const columnTitles = ["Backlog", "To Do", "In Progress", "Review"];
-
+  const Columns = ["backlog", "todo", "in-progress", "review"];
   const [elements, setElements] = useState(cardsData);
-  useEffect(() => {
-    if (localStorage.getItem(params.section) === null)
-      localStorage.setItem(
-        params.section,
-        JSON.stringify({
-          title: "test",
-          description: "text",
-          others: "no",
-          data: [cardsData],
-        })
-      );
-    else {
-      let data = JSON.parse(localStorage.getItem(params.section));
-      setElements(data.data[0]);
-    }
-  }, []);
+  const [project, setProject] = useState({});
+
+    const getProjectCards = async () => {
+        for(let i = 0; i < Columns.length; i++) {
+          const res = await axios.get(
+            `http://localhost:3001/api/v1/projects/${params.section}/cards/${Columns[i]}`, 
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+              }, 
+           }
+          );
+          cardsData[i] = res.data.cards;
+      }
+      setElements(cardsData);
+    };
+
+    const getProject = async () => { 
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/api/v1/projects/${params.section}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+            },
+          }
+        );
+        setProject(response.data.project);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+      }
+    };
+
+    const updateProjectCards = async (id, categoryIndex) => {
+      try {
+        const response = await axios.put(
+          `http://localhost:3001/api/v1/cards/${id}`,
+          {
+            category: Columns[categoryIndex]
+          }
+          ,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error updating project card:", error);
+      }
+    };
+
+
+    useEffect(() => {
+      getProjectCards();
+      getProject();
+    }, []);
+
+    // useEffect(() => {
+    //   if (localStorage.getItem(params.section) === null)
+    //     localStorage.setItem(
+    //       params.section,
+    //       JSON.stringify({
+    //         title: "test",
+    //         description: "text",
+    //         others: "no",
+    //         data: [cardsData],
+    //       })
+    //     );
+    //   else {
+    //     let data = JSON.parse(localStorage.getItem(params.section));
+    //     setElements(data.data[0]);
+    //   }
+    // }, []);
+
   const removeFromList = (list, index) => {
     const result = Array.from(list);
     const [removed] = result.splice(index, 1);
@@ -48,32 +110,29 @@ const KanbanSection = () => {
     const [removedElement, newSourceList] = removeFromList(
       sourceList,
       result.source.index
-    );
+      );
+      
+    updateProjectCards(removedElement._id, result.destination.droppableId);
+
     listCopy[result.source.droppableId] = newSourceList;
     const destinationList = listCopy[result.destination.droppableId];
+
     listCopy[result.destination.droppableId] = addToList(
       destinationList,
       result.destination.index,
       removedElement
-    );
-    setElements(listCopy);
-    localStorage.setItem(
-      params.section,
-      JSON.stringify({
-        title: "test",
-        description: "text",
-        others: "no",
-        data: [listCopy],
-      })
-    );
-  };
+      );
+      setElements(listCopy);
+    };
 
   return (
 		<>
 			<DragDropContext onDragEnd={onDragEnd}>
 				<div className=" overflow-auto bg-[#F3F4F8] h-[100vh] w-[max(calc(100%-300px),67vw)] absolute right-0">
 					<ColumnsList />
-					<div className="title ml-4 mb-5 text-3xl font-semibold font-title">#{params.section}</div>
+					{project && (
+            <div className="title ml-5 mb-5 text-3xl font-semibold font-title">{project.name}</div>
+          )}
 					<div className="flex flex-row flex-wrap characters">
 						<div className="flex flex-row flex-wrap flex-1">
 							<div className="flex-1">
