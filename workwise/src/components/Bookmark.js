@@ -5,6 +5,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Modal, Input } from "antd";
 import { UserContext } from "../utils/contexts/User.js";
 import { IconContext } from "react-icons";
+import {Avatar} from "antd";
 
 const Bookmark = () => {
   const [show, setShow] = useState(false);
@@ -121,11 +122,11 @@ const Bookmark = () => {
           onChange={(e) => setName(e.target.value)}
         />
       </Modal>
-      <div className="absolute h-12 pt-1  left-4 top-1 rounded-lg">
+      <div className="absolute h-12 pt-1 overf left-4 top-1 rounded-lg">
         <img
           src={BookmarkIcon}
           alt="bookMarkIcon"
-          className=" absolute left-1 top-[9px] h-10 w-10 opacity-100"
+          className=" absolute left-1  top-[9px] h-10 w-10 opacity-100"
           onClick={showDrawer}
         />
         <div
@@ -150,11 +151,13 @@ const Bookmark = () => {
         href={bookmark.url}
       >
         {bookmark.imageUrl && (
-          <img
+          <div className="overflow-hidden">
+            <img
             src={bookmark.imageUrl}
             alt="Bookmark Icon"
-            className="bookmark-icon"
+            className="bookmark-icon rounded-full"
           />
+          </div>
         )}
       </a>
     );
