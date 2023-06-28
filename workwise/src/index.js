@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import UserContextProvider from "./utils/contexts/User.js";
 import TimerContextProvider from "./utils/contexts/Timer";
+import { CookiesProvider } from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	// <React.StrictMode>
-	<UserContextProvider>
+	<CookiesProvider>
+		<UserContextProvider>
 		<TimerContextProvider>
 			<App />
 		</TimerContextProvider>
-	</UserContextProvider>
+		</UserContextProvider>
+	</CookiesProvider>
 	// </React.StrictMode>
 );
 

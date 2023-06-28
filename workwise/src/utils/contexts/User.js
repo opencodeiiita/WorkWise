@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from "react";
-
 export const UserContext = createContext();
 
 export default function UserContextProvider({ children }) {

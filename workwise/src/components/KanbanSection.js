@@ -66,12 +66,13 @@ const KanbanSection = () => {
       }
     };
 
-
     useEffect(() => {
       getProjectCards();
-      getProject();
     }, [project]);
 
+    useEffect(()=>{
+      getProject();
+    },[])
     // useEffect(() => {
     //   if (localStorage.getItem(params.section) === null)
     //     localStorage.setItem(
