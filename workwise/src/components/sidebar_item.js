@@ -43,7 +43,7 @@ const SItem = (props) => {
         <Link to={`/kanban/${props.project._id}`}>
           <div
             className={`${
-              props.select ? "bg-gray-600 text-black" : ""
+              props.selected ? "bg-gray-200 text-white" : ""
             } cursor-pointer px-3 py-1 rounded-xl transition text-gray-600 hover:bg-gray-200 hover:text-gray-800`}
           >
             {props.project.name}

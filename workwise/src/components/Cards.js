@@ -24,7 +24,7 @@ function Cards(props) {
             <div className="flex justify-start flex-col">
               {props?.data &&
                 props.data.map((item, index) => (
-                  <Card key={item._id} card={item} index={index} />
+                  <Card key={item._id} card={item} index={index} setElements={props.setElements}/>
                 ))}
             </div>
             {provided.placeholder}
