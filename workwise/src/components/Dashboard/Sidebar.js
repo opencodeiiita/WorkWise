@@ -1,26 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import SidebarLinkGroup from "./SidebarLinkGroup";
-import image from "../../icons/logo.png"
+import image from "../../icons/logo.png";
 import axios from "axios";
-import { useCookies } from "react-cookie";
 
 
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  
   const location = useLocation();
   const { pathname } = location;
+  const navigate =useNavigate();
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
+
+  const logout = () => {
+    axios.get('http://localhost:3001/api/v1/logout', { withCredentials: true })
+      .then(response => {
+        window.location.href = '/';
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error('Logout error:', error);
+      });
+  };
+  
 
   const storedSidebarExpanded = localStorage.getItem("sidebar-expanded");
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
 
-  
 
   // close on click outside
   useEffect(() => {
@@ -69,11 +79,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           {/* <!-- SIDEBAR HEADER --> */}
           <div className="flex items-center justify-center gap-2 px-6 py-5.5 pb-2 lg:py-6.5">
             <NavLink to="/">
-              <img
-                src={image}
-                alt="Logo"
-		
-              />
+              <img src={image} alt="Logo" />
             </NavLink>
 
             <button
@@ -354,16 +360,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                               <li>
                                 <Link
-                                
-                                  className= "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white "
-                                   
-                                  
-                            //  onClick={() => {
-                            //         logOut();
-                            //       }
-                            //     }
+                                  className="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
+                                  onClick={logout}
                                 >
-                                  Log Out
+                                  Logout
                                 </Link>
                               </li>
                             </ul>
