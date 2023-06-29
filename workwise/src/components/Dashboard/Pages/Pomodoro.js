@@ -1,31 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Pomodoro = () => {
-  const [timers, setTimers] = useState([]);
-
-  useEffect(() => {
-    const fetchTimers = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/api/v1/timer", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-          },
-        });
-
-        setTimers(response.data.pomodoroTimers.sessions[0]);
-        console.log(response.data.pomodoroTimers.sessions[0]);
-      } catch (error) {
-        console.error("Error fetching timers:", error);
-      }
-    };
-
-    fetchTimers();
-  }, []);
+const Pomodoro = (props) => {
+  
+  const [timers, setTimers] = useState(props.timer);
 
   return (
-    <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+    <div className="rounded-sm border mb-8 border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>

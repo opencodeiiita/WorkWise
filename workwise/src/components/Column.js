@@ -6,12 +6,12 @@ import { BsPlus } from "react-icons/bs";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect,useContext} from "react";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import  {Image} from "antd";
-
 import {Select} from "antd";
+import { UserContext } from "../utils/contexts/User.js";
 
 export default function Column({ index, data, setElements, title }) {
   const params = useParams();
@@ -22,6 +22,7 @@ export default function Column({ index, data, setElements, title }) {
   const [tags, setTags] = useState([]);
   const inde = parseInt(index);
   const [imgUrl, setImgUrl] = useState("");
+  const { baseUrl } = useContext(UserContext);
 
   const dateFormat = "DD/MM/YYYY";
 
@@ -51,7 +52,7 @@ export default function Column({ index, data, setElements, title }) {
    const getProjectCards = async () => {
 			for (let i = 0; i < Columns.length; i++) {
 				const res = await axios.get(
-					`http://localhost:3001/api/v1/projects/${params.section}/cards/${Columns[i]}`,
+					`${baseUrl}/projects/${params.section}/cards/${Columns[i]}`,
 					{
 						headers: {
 							"Content-Type": "application/json",
@@ -66,7 +67,7 @@ export default function Column({ index, data, setElements, title }) {
 
   const onFinish = async (values) => {
     let res = await axios.post(
-      'http://localhost:3001/api/v1/projects/' + params.section + '/cards',
+      `${baseUrl}/projects/` + params.section + '/cards',
       {
         title: values.title,
         description: values.description,

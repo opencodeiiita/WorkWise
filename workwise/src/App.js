@@ -15,6 +15,7 @@ import Profile from "./components/Dashboard/Pages/Profile.js";
 import Pomodoro from "./components/Dashboard/Pages/Pomodoro.js";
 import Bookmarks from "./components/Dashboard/Pages/Bookmarks.js";
 import Projects from "./components/Dashboard/Pages/Projects.js";
+import PomodoroPage from "./components/Dashboard/Pages/PomodoroPage.js";
 
 
 function App() {
@@ -79,7 +80,7 @@ function AnimatedRoutes() {
 	};
 
 	useEffect(() => {
-		// fetchBg();
+		fetchBg();
 		getUser();
 	}, []);
 
@@ -116,7 +117,7 @@ function AnimatedRoutes() {
 							<Route path="/home" element={<Homepage url={url} />} />
 							<Route element={<DefaultLayout />}>
 								<Route path="/settings/profile" element={<Profile />} />
-								<Route path="/settings/pomodoro" element={<Pomodoro />} />
+								<Route path="/settings/pomodoro" element={<PomodoroPage />} />
 								<Route path="/settings/bookmarks" element={<Bookmarks />} />
 								<Route path="/settings/projects" element={<Projects />} />
 							</Route>

@@ -83,14 +83,16 @@
 
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
   .quote__bg {
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(60px) !important;
   }
 }
 
 .quote__text {
   -webkit-animation: fadein 1.5s linear forwards;
   animation: fadein 1.5s linear forwards;
+  font-size: 1.5rem; 
+  width: 50vw;
 }
 .quote__text--fadeout {
   -webkit-animation: fadeout 1.5s linear forwards;

@@ -4,9 +4,12 @@ import Cards from "./Cards";
 import { DragDropContext } from "react-beautiful-dnd";  
 import ColumnsList from "./ColumnsList";
 import axios from "axios";
+import { UserContext } from "../utils/contexts/User.js";
+import { useContext } from "react";
 
 const KanbanSection = () => {
   const params = useParams();
+  const { baseUrl } = useContext(UserContext);
   let cardsData = [[], [], [], []];
   const columnTitles = ["Backlog", "To Do", "In Progress", "Review"];
   const Columns = ["backlog", "todo", "in-progress", "review"];
@@ -16,7 +19,7 @@ const KanbanSection = () => {
     const getProjectCards = async () => {
         for(let i = 0; i < Columns.length; i++) {
           const res = await axios.get(
-            `http://localhost:3001/api/v1/projects/${params.section}/cards/${Columns[i]}`, 
+            `${baseUrl}/projects/${params.section}/cards/${Columns[i]}`, 
             {
               headers: {
                 "Content-Type": "application/json",
@@ -32,14 +35,14 @@ const KanbanSection = () => {
     const getProject = async () => { 
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/v1/projects/${params.section}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-            },
-          }
-        );
+					`${baseUrl}/projects/${params.section}`,
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+						},
+					}
+				);
         setProject(response.data.project);
       } catch (error) {
         console.error("Error fetching project:", error);
@@ -49,18 +52,17 @@ const KanbanSection = () => {
     const updateProjectCards = async (id, categoryIndex) => {
       try {
         const response = await axios.put(
-          `http://localhost:3001/api/v1/cards/${id}`,
-          {
-            category: Columns[categoryIndex]
-          }
-          ,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
-            },
-          }
-        );
+					`${baseUrl}/api/v1/cards/${id}`,
+					{
+						category: Columns[categoryIndex],
+					},
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+						},
+					}
+				);
       } catch (error) {
         console.error("Error updating project card:", error);
       }

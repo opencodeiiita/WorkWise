@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../utils/contexts/User";
 import axios from "axios";
 
+
 const Profile = () => {
   const {user, setUser} = useContext(UserContext);
   const [location, setLocation] = useState("");
   const [fullName, setFullName] = useState(user.fullName);
+  const { baseUrl } = useContext(UserContext);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -39,7 +41,7 @@ const Profile = () => {
   const handleSave = async () => {
   
     const res = await axios.post(
-      "http://localhost:3001/api/v1/user/update",
+      `${baseUrl}/user/update`,
       {
         name: fullName,
         location: location,

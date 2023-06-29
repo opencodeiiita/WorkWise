@@ -4,9 +4,12 @@ import SItem from "./sidebar_item";
 import { useState, useEffect } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../utils/contexts/User.js";
+import { useContext } from "react";
 
 const Sidebar = () => {
   const params = useParams();
+  const {baseUrl} = useContext(UserContext);
   const [dark, setDark] = useState(false);
 
   const [projects, setProjects] = useState([]);
@@ -20,7 +23,7 @@ const Sidebar = () => {
   const fetchProjects = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3001/api/v1/projects",
+        `${baseUrl}/projects`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -44,7 +47,7 @@ const Sidebar = () => {
   const createProject = async (name) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/v1/projects",
+        `${baseUrl}/projects`,
         {
           name: name,
         },
@@ -195,7 +198,7 @@ const Sidebar = () => {
 					)}
 				</div>
 			</div>
-			<div className="select-none items-center justify-around flex text-[min(.5em,15px)] bg-[#f2f1f6] h-10 w-4/5 absolute bottom-10 rounded-full left-[8%] ">
+			{/* <div className="select-none items-center justify-around flex text-[min(.5em,15px)] bg-[#f2f1f6] h-10 w-4/5 absolute bottom-10 rounded-full left-[8%] ">
 				<div
 					className="h-[70%] cursor-pointer rounded-full bg-white items-center w-1/3 flex justify-center"
 					onClick={themechange}
@@ -209,7 +212,7 @@ const Sidebar = () => {
 					Dark
 				</div>
 				<div className="themeslider absolute w-1/3 left-5 h-[70%] cursor-pointer transition-all  rounded-full "></div>
-			</div>
+			</div> */}
 		</div>
 	);
 };

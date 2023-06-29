@@ -10,7 +10,7 @@ export default function Kanban() {
 	return (
 		<motion.div>
 			<Link to="/">
-				<div className="absolute left-8 top-[50%] h-16 w-16 scale-50 rounded-full  rotate-180 z-10">
+				<div className="absolute left-2 top-[50%] h-16 w-16 scale-50 rounded-full  rotate-180 z-10">
 					<svg
 						width={"100%"}
 						height={"100%"}
@@ -22,8 +22,8 @@ export default function Kanban() {
 					</svg>
 				</div>
 			</Link>
-			<Sidebar/>
-			<Outlet/>
+			<Sidebar />
+			<Outlet />
 		</motion.div>
 	);
 }

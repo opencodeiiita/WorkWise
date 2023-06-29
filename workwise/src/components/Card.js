@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { Draggable } from "react-beautiful-dnd";
@@ -9,9 +9,13 @@ import { useParams } from "react-router-dom";
 import { Form, Input, InputNumber } from "antd";
 import { Modal, Select, Image } from "antd";
 import { useState } from "react";
+import { UserContext } from "../utils/contexts/User.js";
+
 
 function Card(props) {
   const params = useParams();
+  const { baseUrl } = useContext(UserContext);
+ 
   const card = props.card;
   const dateFormat = "DD/MM/YYYY";
   const text = <span>Actions</span>;
@@ -47,7 +51,7 @@ function Card(props) {
   const getProjectCards = async () => {
     for (let i = 0; i < Columns.length; i++) {
       const res = await axios.get(
-        `http://localhost:3001/api/v1/projects/${params.section}/cards/${Columns[i]}`,
+        `${baseUrl}/projects/${params.section}/cards/${Columns[i]}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -61,7 +65,7 @@ function Card(props) {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`http://localhost:3001/api/v1/cards/${card._id}`, {
+    await axios.delete(`${baseUrl}/cards/${card._id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
@@ -101,7 +105,7 @@ function Card(props) {
 
   const onFinish = async (values) => {
     await axios.put(
-      `http://localhost:3001/api/v1/cards/${card._id}`,
+      `${baseUrl}/cards/${card._id}`,
       {
         title: values.title,
         description: values.description,
@@ -177,46 +181,7 @@ function Card(props) {
                         {item.name}
                       </Tag>
                     );
-                    // if (item === "Research") {
-                    //   return (
-                    //     <span
-                    //       key={index}
-                    //       class="inline-block bg-blue-500 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
-                    //     >
-                    //       {item}
-                    //     </span>
-                    //   );
-                    // }
-                    // if (item === "Design") {
-                    //   return (
-                    //     <span
-                    //       key={index}
-                    //       class="inline-block bg-violet-700 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
-                    //     >
-                    //       {item}
-                    //     </span>
-                    //   );
-                    // }
-                    // if (item === "Content") {
-                    //   return (
-                    //     <span
-                    //       key={index}
-                    //       class="inline-block bg-amber-500 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
-                    //     >
-                    //       {item}
-                    //     </span>
-                    //   );
-                    // }
-                    // if (item === "Planning") {
-                    //   return (
-                    //     <span
-                    //       key={index}
-                    //       class="inline-block bg-orange-700 rounded px-3 py-1 text-sm font-semibold text-gray-50 mr-2 mb-2"
-                    //     >
-                    //       {item}
-                    //     </span>
-                    //   );
-                    // }
+                  
                   })}
                 </div>
                 {card?.imageUrl && (

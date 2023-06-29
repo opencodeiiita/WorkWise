@@ -164,11 +164,10 @@ export default function Homepage({ url }) {
 								<Date />
 								<Weather
 									cityName={"mumbai"} //This is a temporary name we can have different city names.
-									apiKey={"a045d78dfc153d0c97dd1e87653d1ced"} //fill the api key here to make the widget work.
 								/>
 								<Bookmark />
 								<button
-									className="absolute bottom-0 right-0 py-6 sm:py-2 px-6 sm:px-4 transition duration-150 ease-in-out"
+									className="absolute bottom-2 right-0 py-6 sm:py-2 px-6 sm:px-4 transition duration-150 ease-in-out"
 									onClick={handleTodoListToggle}
 								>
 									<FaClipboardList
@@ -208,7 +207,7 @@ export default function Homepage({ url }) {
 						{/* Modal Render End  */}
 					</div>
 
-					<Quotes />
+					{!focus && <Quotes />}
 				</div>
 			</motion.div>
 		</>

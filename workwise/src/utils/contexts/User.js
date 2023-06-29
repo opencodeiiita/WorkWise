@@ -11,7 +11,7 @@ export default function UserContextProvider({ children }) {
   const [focus, setFocus] = useState(
 		localStorage.getItem("timer") === null ? false : true
 	);
-  const [baseUrl, setBaseUrl] = useState("http://localhost:3001/api/v1");
+  const [baseUrl, setBaseUrl] = useState(process.env.REACT_APP_PRODUCTION==="true" ? process.env.REACT_APP_PRODUCTION_URL : process.env.REACT_APP_DEVELOPMENT_URL);
 
   return (
     <UserContext.Provider

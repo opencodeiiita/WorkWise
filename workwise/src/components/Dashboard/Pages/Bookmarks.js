@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../../../utils/contexts/User.js";
 
 const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
+  const { baseUrl } = useContext(UserContext);
 
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/v1/bookmarks",
+          `${baseUrl}/bookmarks`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -28,7 +31,7 @@ const Bookmarks = () => {
   const deleteBookmark = async (bookmarkId) => {
 	try {
 	  await axios.delete(
-		`http://localhost:3001/api/v1/bookmarks/${bookmarkId}`,
+		`${baseUrl}/bookmarks/${bookmarkId}`,
 		{
 		  headers: {
 			"Content-Type": "application/json",
