@@ -126,7 +126,7 @@ const Bookmark = () => {
         <img
           src={BookmarkIcon}
           alt="bookMarkIcon"
-          className=" absolute left-1  top-[9px] h-10 w-10 opacity-100"
+          className=" absolute left-1  top-[9px] h-12 w-12 opacity-100"
           onClick={showDrawer}
         />
         <div
