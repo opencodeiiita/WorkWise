@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import cardsData from "../utils/cards.json";
 import Card from "./Card.js";
 import { Droppable } from "react-beautiful-dnd";
@@ -11,7 +11,7 @@ function Cards(props) {
         data={props.fullData}
         setElements={props.setElements}
         index={props.id}
-		title = {props.columnTitle}
+		    title = {props.columnTitle}
       />
       <Droppable droppableId={`${props.id}`}>
         {/* key={props.id} */}
@@ -22,9 +22,9 @@ function Cards(props) {
             className="min-h-screen"
           >
             <div className="flex justify-start flex-col">
-              {props.data &&
+              {props?.data &&
                 props.data.map((item, index) => (
-                  <Card key={item.id} card={item} index={index} />
+                  <Card key={item._id} card={item} index={index} setElements={props.setElements}/>
                 ))}
             </div>
             {provided.placeholder}

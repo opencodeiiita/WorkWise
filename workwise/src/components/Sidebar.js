@@ -1,27 +1,78 @@
+import axios from "axios";
 import icon from "../icons/favicon.ico";
 import SItem from "./sidebar_item";
 import { useState, useEffect } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../utils/contexts/User.js";
+import { useContext } from "react";
 
-export default () => {
+const Sidebar = () => {
   const params = useParams();
+  const {baseUrl} = useContext(UserContext);
   const [dark, setDark] = useState(false);
-  const [items, setItems] = useState([]);
 
-  function saved() {
-    let tempObj = [];
-    for (let i = 0; i < localStorage.length/2; i++) {
-      if (`${localStorage.getItem(i)}` === params.section)
-        tempObj.push(<SItem key={i} keyno={i} select />);
-      else tempObj.push(<SItem key={i} keyno={i} />);
+  const [projects, setProjects] = useState([]);
+  const [input, setInput] = useState("");
+  const [showInput, setShowInput] = useState(false);
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/projects`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          },
+        }
+      );
+      const { projects } = response.data;
+
+      setProjects(projects);
+      console.log(projects);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
     }
-    setItems(tempObj);
-  }
+  };
 
-  let addItem = () => {
-    let n = items.length;
-    setItems(items.concat(<SItem key={n} keyno={n} />));
+  const handleClick = (e) => {
+    setShowInput(true);
+  };
+
+  const createProject = async (name) => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/projects`,
+        {
+          name: name,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          },
+        }
+      );
+      setProjects([...projects, response.data.newProject]);
+      setInput(""); 
+    } catch (error) {
+      console.error("Error creating project:", error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      createProject(input);
+    }
   };
 
   let Slide = (e) => {
@@ -77,7 +128,7 @@ export default () => {
 		<div
 			className="sidebar h-[100vh] w-[min(300px,33vw)] transition-all text-[min(4vw,30px)]
         shadow-md shadow-black fixed"
-			onLoad={saved}
+			// onLoad={saved}
 		>
 			<div
 				className="font-bold  h-10 cursor-pointer font-title
@@ -115,17 +166,39 @@ export default () => {
         w-4/5 ml-auto mr-auto mt-12 p-3"
 			>
 				<div className="font-bold mb-3 text-[.6em]">Projects</div>
-				{items}
-				<div
-					id="add_item"
-					className="cursor-pointer relative w-5 h-5 text-gray-300 mt-2 bg-gray-300 rounded-full flex items-center justify-center"
-					onClick={addItem}
-				>
-					<div className="h-1/2 border-[1px] border-gray-600 absolute"> </div>
-					<div className="w-1/2 border-[1px] border-gray-600 absolute"></div>
+				{projects.map((project, i) =>
+					project._id === params.section ? (
+						<SItem key={i} keyno={i} project={project} selected />
+					) : (
+						<SItem key={i} keyno={i} project={project} />
+					)
+				)}
+
+				<div className="flex ">
+					<div
+						id="add_item"
+						className="cursor-pointer relative w-5 h-5 text-gray-300 mt-2 bg-gray-300 rounded-full flex items-center justify-center"
+						onClick={handleClick}
+					>
+						<div className="h-1/2 border-[1px] border-gray-600 absolute"> </div>
+						<div className="w-1/2 border-[1px] border-gray-600 absolute"></div>
+					</div>
+					{showInput && (
+						<>
+							<input
+								type="text"
+								autoFocus
+								className="bg-gray-100 border-b-[1px] border-black outline-none text-[.45em] ml-2 w-36 text-black p-1 pl-2"
+								placeholder="Add a project name"
+								value={input}
+								onChange={handleInputChange}
+								onKeyPress={handleKeyPress}
+							/>
+						</>
+					)}
 				</div>
 			</div>
-			<div className="select-none items-center justify-around flex text-[min(.5em,15px)] bg-[#f2f1f6] h-10 w-4/5 absolute bottom-10 rounded-full left-[8%] ">
+			{/* <div className="select-none items-center justify-around flex text-[min(.5em,15px)] bg-[#f2f1f6] h-10 w-4/5 absolute bottom-10 rounded-full left-[8%] ">
 				<div
 					className="h-[70%] cursor-pointer rounded-full bg-white items-center w-1/3 flex justify-center"
 					onClick={themechange}
@@ -139,7 +212,9 @@ export default () => {
 					Dark
 				</div>
 				<div className="themeslider absolute w-1/3 left-5 h-[70%] cursor-pointer transition-all  rounded-full "></div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
+
+export default Sidebar;

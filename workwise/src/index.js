@@ -3,11 +3,21 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import UserContextProvider from "./utils/contexts/User.js";
+import TimerContextProvider from "./utils/contexts/Timer";
+import { CookiesProvider } from "react-cookie";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <React.StrictMode>
-    <App />
-  // </React.StrictMode>
+	// <React.StrictMode>
+	<CookiesProvider>
+		<UserContextProvider>
+		<TimerContextProvider>
+			<App />
+		</TimerContextProvider>
+		</UserContextProvider>
+	</CookiesProvider>
+	// </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
