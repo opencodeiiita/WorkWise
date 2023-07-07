@@ -16,6 +16,7 @@ import Pomodoro from "./components/Dashboard/Pages/Pomodoro.js";
 import Bookmarks from "./components/Dashboard/Pages/Bookmarks.js";
 import Projects from "./components/Dashboard/Pages/Projects.js";
 import PomodoroPage from "./components/Dashboard/Pages/PomodoroPage.js";
+import Auth from "./pages/auth.js";
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
 function AnimatedRoutes() {
 	const { isLoggedIn, setIsLoggedIn, user, setUser, baseUrl } = useContext(UserContext);
 	const navigate = useNavigate();
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const location = useLocation();
 	const [rendered, setRendered] = useState(false);
 	const [url, setUrl] = useState(
@@ -58,24 +59,22 @@ function AnimatedRoutes() {
 
 	const getUser = async () => {
 		try {
-			const response = await axios.get(
-				`${baseUrl}/auth/success`,
-				{ withCredentials: true }
-			);
-			
+			const response = await axios.get(`${baseUrl}/auth/success`, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+				},
+			});
+
 			if (response.status === 200) {
 				setIsLoggedIn(true);
 				setUser(response.data.user);
-				localStorage.setItem("jwt_token", response.data.token);
 				localStorage.setItem("user", JSON.stringify(response.data.user));
+				navigate("/home");
 			} else if (response.status === 401) {
-				// Handle unauthorized access
 				<Alert message="Error" type="error" showIcon />;
 			}
 		} catch (err) {
 			console.error(err);
-		} finally {
-			setIsLoading(false); // Set loading to false after API call completes
 		}
 	};
 
@@ -85,7 +84,12 @@ function AnimatedRoutes() {
 	}, []);
 
 	useEffect(() => {
-		if (!isLoggedIn && !isLoading) {
+		if (
+			!isLoggedIn &&
+			!isLoading &&
+			!location.pathname.startsWith("/auth")
+			&& location.pathname !== "/"
+		) {
 			navigate("/");
 		} else if (isLoggedIn && location.pathname === "/") {
 			navigate("/home");
@@ -112,6 +116,7 @@ function AnimatedRoutes() {
 				<Routes location={location} key={location.pathname}>
 					<Route path="/" element={<Login />} />
 					<Route path="/landing" element={<LandingPage />} />
+					<Route path="/auth/:id" element={<Auth setIsLoading={setIsLoading}/>} />
 					{isLoggedIn ? (
 						<>
 							<Route path="/home" element={<Homepage url={url} />} />
