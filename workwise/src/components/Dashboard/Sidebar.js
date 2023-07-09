@@ -3,6 +3,8 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import SidebarLinkGroup from "./SidebarLinkGroup";
 import image from "../../icons/logo.png";
 import axios from "axios";
+import { UserContext } from "../../utils/contexts/User";
+import { useContext } from "react";
 
 
 
@@ -11,18 +13,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { pathname } = location;
   const navigate =useNavigate();
 
+  const { setUser, setIsLoggedIn} = useContext(UserContext);
+
   const trigger = useRef(null);
   const sidebar = useRef(null);
 
   const logout = () => {
-    axios.get('http://localhost:3001/api/v1/logout', { withCredentials: true })
-      .then(response => {
-        window.location.href = '/';
-        window.location.reload();
-      })
-      .catch(error => {
-        console.error('Logout error:', error);
-      });
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    localStorage.removeItem("jwt_token");
+    setUser(null);
+    navigate("/");
   };
   
 
